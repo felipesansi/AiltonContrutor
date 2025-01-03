@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AiltonContrutor.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AiltonConstrutor.Models
@@ -31,14 +32,27 @@ namespace AiltonConstrutor.Models
         public bool AreaGurmet { get; set; }
 
         [Display(Name = "Existe churrasqueira")]
-        public bool churrasqueira { get; set; }
-
+        public bool Churrasqueira { get; set; }
 
         [Display(Name = "Existe piscina")]
-        public bool piscina { get; set; }
+        public bool Piscina { get; set; }
 
+        public string? ImagemUrl { get; set; }
 
+        [Display(Name = "Casa á venda")]
+        public bool ImovelAVenda { get; set; }
 
+        [Display(Name = "Imovel em construção")]
+        public bool imovelEmConstrucao { get; set; }
 
+        [Display(Name = "Valor do Imovel")]
+        public decimal Valor { get; set; }
+
+        public string? ImagemThumbnailUrl { get; set; }
+         
+        public int CategoriaId { get; set; } // FK
+
+        [ForeignKey("CategoriaId")]
+        public required Categoria Categoria { get; set; }
     }
 }
