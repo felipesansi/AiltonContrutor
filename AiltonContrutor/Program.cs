@@ -1,7 +1,16 @@
+using AiltonContrutor.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Configuração do banco de dados(SQL Server): AppDbContext
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Configuração do banco de dados(SQL Server): AppDbContext
+
 
 var app = builder.Build();
 
@@ -19,6 +28,11 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+app.MapControllerRoute(
+           name: "areas",
+           pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
+         );
 
 app.MapControllerRoute(
     name: "default",

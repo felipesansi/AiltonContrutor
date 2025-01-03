@@ -19,7 +19,7 @@ namespace AiltonContrutor.Models
         [StringLength(200, ErrorMessage = "O tamanho maximo é de 200 caracteres")]
         [Display(Name = "Descrição")]
         public required string Descricao { get; set; }
-        public List <Imovel> imoveis { get; set; }
 
+        public required List<Imovel> Imoveis { get; set; } = new List<Imovel>();
     }
 }
