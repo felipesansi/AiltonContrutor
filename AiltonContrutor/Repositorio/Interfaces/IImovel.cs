@@ -1,11 +1,11 @@
 ﻿using AiltonConstrutor.Models;
 
-namespace AiltonContrutor.Repositorio.Interfaces
+namespace AiltonConstrutor.Repositorio.Interfaces
 {
     public interface IImovel
     {
-        IEnumerable<Imovel> Imovel { get; }
-        IEnumerable<Imovel> ImovelAvenda { get; }
-        Imovel GetImovelById(int idImovel);
+        IEnumerable<Imovel> imovels { get; }
+        IEnumerable<Imovel> ImoveisPorStatatus { get; } // Obtém imóveis por status
+        Imovel? ImovelPorId(int idImovel); // Obtém imóvel por ID
     }
 }

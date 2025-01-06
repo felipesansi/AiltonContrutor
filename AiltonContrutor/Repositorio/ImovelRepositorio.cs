@@ -1,9 +1,9 @@
 ﻿using AiltonConstrutor.Models;
-using AiltonContrutor.Context;
-using AiltonContrutor.Repositorio.Interfaces;
+using AiltonConstrutor.Repositorio.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using AiltonContrutor.Context;
 
-namespace AiltonContrutor.Repositorio
+namespace AiltonConstrutor.Repositorio
 {
     public class ImovelRepositorio : IImovel
     {
@@ -14,14 +14,18 @@ namespace AiltonContrutor.Repositorio
             _appDbContext = appDbContext;
         }
 
-        public IEnumerable<Imovel> Imovel => _appDbContext.Imoveis.Include(c => c.Categoria);
+        // Retorna todos os imóveis, incluindo suas categorias
+        public IEnumerable<Imovel> imovels =>
+            _appDbContext.Imoveis.Include(c => c.Categoria);
 
-        public IEnumerable<Imovel> ImovelAvenda => _appDbContext.Imoveis.Include(c => c.Categoria).Where(p => p.ImovelAVenda);
+        // Retorna imóveis com o status "À venda"
+        public IEnumerable<Imovel> ImovisPorStatus => _appDbContext.Imoveis.Include(c => c.Categoria).Where(p => p.StatusImovel == "À venda" || p.StatusImovel == "Em construção");
 
-        public Imovel? GetImovelById(int idImovel)
-        {
-            return _appDbContext.Imoveis.FirstOrDefault(p => p.IdImovel == idImovel);
-        }
+        // Retorna um imóvel pelo ID
+        public Imovel? ImovelPorId(int idImovel) =>
+            _appDbContext.Imoveis.Include(c => c.Categoria).FirstOrDefault(p => p.IdImovel == idImovel);
 
+        // Implementação do membro da interface
+        public IEnumerable<Imovel> ImoveisPorStatatus => _appDbContext.Imoveis.Include(c => c.Categoria).Where(p => p.StatusImovel == "À venda");
     }
 }

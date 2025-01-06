@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\ImovelController1\**" />
+    <Content Remove="Views\ImovelController1\**" />
+    <EmbeddedResource Remove="Views\ImovelController1\**" />
+    <None Remove="Views\ImovelController1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
@@ -17,8 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\" />
     <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Servicos\" />
     <Folder Include="Areas\Admin\Views\" />
   </ItemGroup>
 

@@ -1,4 +1,8 @@
+using AiltonConstrutor.Repositorio;
+using AiltonConstrutor.Repositorio.Interfaces;
 using AiltonContrutor.Context;
+using AiltonContrutor.Repositorio;
+using AiltonContrutor.Repositorio.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +15,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 // Configuração do banco de dados(SQL Server): AppDbContext
 
+// Configuração do Repositório
+builder.Services.AddScoped<IImovel, ImovelRepositorio>();
+builder.Services.AddScoped<ICategoria, CategoriaRepositorio>();
+builder.Services.AddScoped<IVideo, VideoRepositorio>();
+// Configuração do Repositório
 
 var app = builder.Build();
 

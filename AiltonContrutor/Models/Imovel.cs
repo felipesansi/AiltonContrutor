@@ -10,26 +10,26 @@ namespace AiltonConstrutor.Models
         [Key]
         public int IdImovel { get; set; }
 
-        [Required(ErrorMessage = "O campo de titulo é obrigatório")]
-        [Display(Name = "Titulo")]
-        [StringLength(40, MinimumLength = 10, ErrorMessage = "O {0} deve ter o minimo {1} e o maximo {2} caracteres")]
+        [Required(ErrorMessage = "O campo de título é obrigatório")]
+        [Display(Name = "Título")]
+        [StringLength(40, MinimumLength = 10, ErrorMessage = "O {0} deve ter no mínimo {1} e no máximo {2} caracteres")]
         public required string Titulo { get; set; }
 
-        [Required(ErrorMessage = "O campo de Descrição é obrigatório")]
-        [Display(Name = "Titulo")]
-        [StringLength(120, MinimumLength = 20, ErrorMessage = "O {0} deve ter o minimo {1} e o maximo {2} caracteres")]
+        [Required(ErrorMessage = "O campo de descrição é obrigatório")]
+        [Display(Name = "Descrição")]
+        [StringLength(120, MinimumLength = 20, ErrorMessage = "O {0} deve ter no mínimo {1} e no máximo {2} caracteres")]
         public required string Descricao { get; set; }
 
-        [Required(ErrorMessage = "O campo de Quartos é obrigatório")]
-        [Display(Name = "Números de quartos")]
+        [Required(ErrorMessage = "O campo de quartos é obrigatório")]
+        [Display(Name = "Número de quartos")]
         public required int Quartos { get; set; }
 
         [Required(ErrorMessage = "O campo de banheiros é obrigatório")]
-        [Display(Name = "Números de banheiros")]
+        [Display(Name = "Número de banheiros")]
         public required int Banheiros { get; set; }
 
-        [Display(Name = "Existe aréa Gurmet")]
-        public bool AreaGurmet { get; set; }
+        [Display(Name = "Existe área gourmet")]
+        public bool AreaGourmet { get; set; }
 
         [Display(Name = "Existe churrasqueira")]
         public bool Churrasqueira { get; set; }
@@ -37,22 +37,22 @@ namespace AiltonConstrutor.Models
         [Display(Name = "Existe piscina")]
         public bool Piscina { get; set; }
 
-        public string? ImagemUrl { get; set; }
-
-        [Display(Name = "Casa á venda")]
-        public bool ImovelAVenda { get; set; }
-
-        [Display(Name = "Imovel em construção")]
-        public bool imovelEmConstrucao { get; set; }
-
-        [Display(Name = "Valor do Imovel")]
+        [Display(Name = "Valor do imóvel")]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Valor { get; set; }
 
+
+        public string? ImagemUrl { get; set; }
+
         public string? ImagemThumbnailUrl { get; set; }
-         
-        public int CategoriaId { get; set; } // FK
+
+        [Display(Name = "Status do Imóvel")]
+        public string? StatusImovel { get; set; }
+
+        public int CategoriaId { get; set; } // FK para Categoria
 
         [ForeignKey("CategoriaId")]
         public required Categoria Categoria { get; set; }
+        public ICollection<Video> Videos { get; set; } = new List<Video>();
     }
 }
