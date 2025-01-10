@@ -29,7 +29,74 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
-.header
-{
-    background-color:cadetblue;
+
+.info-table li {
+    list-style-type: none;
 }
+
+
+
+
+
+div .central {
+    position: relative;
+    background-color: #343a40;
+    background: url("../imagens/Casa piscin .jpeg") no-repeat center center;
+    background-size: cover;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+
+    div.central:before {
+        content: "";
+        position: absolute;
+        background-color: ActiveBorder;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0.5
+    }
+
+.video-frame {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    overflow: hidden; 
+    border-radius: 8px; 
+    background-color: #000000c4;
+    margin-top:100px;
+}
+
+.video-background {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.8; 
+    background-color: black; 
+    mix-blend-mode: multiply;
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-decoration: none;
+    color: white;
+    font-size: 3rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+
+}
+.container

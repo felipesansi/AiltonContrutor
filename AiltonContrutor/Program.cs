@@ -3,6 +3,7 @@ using AiltonConstrutor.Repositorio.Interfaces;
 using AiltonContrutor.Context;
 using AiltonContrutor.Repositorio;
 using AiltonContrutor.Repositorio.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,11 @@ builder.Services.AddScoped<IImovel, ImovelRepositorio>();
 builder.Services.AddScoped<ICategoria, CategoriaRepositorio>();
 builder.Services.AddScoped<IVideo, VideoRepositorio>();
 // Configuração do Repositório
+
+// Configuração do Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>() // Configuração do Identity
+    .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders(); // Configuração do Identity
+ // Configuração do Identity
 
 var app = builder.Build();
 
