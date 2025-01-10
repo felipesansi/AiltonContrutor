@@ -1,21 +1,112 @@
-﻿@{
-    ViewData["Title"] = "início";
+﻿<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+@{
+    ViewData["Title"] = "Início";
 }
 
-<div class="container">
-    <div class="row align-items-center">
-        <div class="col-md-6 ">
-            <h1 class="m-5 text-danger ">Ailton Construtor</h1>
-            <p>Seja bem-vindo ao site da Ailton Construtor, aqui você encontra os melhores profissionais para a construção de sua casa.</p>
-            <p >Entre em contato conosco e solicite um orçamento.</p>
 
-            <button type="button" class="btn btn-danger rounded-pill m-4 p-3" >
-                <img src="~/imagens/DESENHO-btn.png" class="w-25 p-2" alt="icone logo" />Clique aqui
-            </button>
+    <div class="central">
+        <div class="container position-relative">
+            <div class="row justify-content-center">
+                <div class="col-xl-6">
+                    <div class="text-center text-white">
+
+                        <h1 class="custom-text mb-5">Construa seu sonho!</h1>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+               
+<div class="container mt-4">
+    <div class="row">
+        
+        <div class="col-md-4">
+            <img src="~/imagens/hero.png" alt="" class="w-100" />
         </div>
 
-        <div class="col-md-6 align-items-center ">
-            <img src="~/imagens/hero.png" class="img-fluid mt-5" alt="imagem de uma parede em EPS">
+        
+        <div class="col-md-4 mt-4">
+            <h6>Construa sua casa com a gente</h6>
+            <h2>As melhores casas da região</h2>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Painéis Monolíticos de EPS
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            Oferecemos construções modernas com painéis monolíticos de EPS, tecnologia que proporciona leveza, isolamento térmico e acústico. Este método inovador reduz o tempo de construção e os custos, mantendo a resistência e qualidade. Uma solução ideal para quem busca eficiência e economia.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            Sustentabilidade e Economia
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            Construções bio-sustentáveis com painéis de EPS que reduzem o impacto ambiental e promovem economia. Além de serem mais baratos, esses materiais oferecem eficiência energética, contribuindo para um futuro mais verde. Escolha construir com qualidade, consciência ambiental e custo acessível.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                            Economia e Conforto com EPS
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            Os painéis de EPS são até 30% mais econômicos que métodos tradicionais, sem comprometer a qualidade. Com isolamento térmico superior, proporcionam ambientes mais confortáveis e econômicos no consumo de energia. Perfeito para quem deseja unir inovação e custo-benefício.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+        <div class="col-md-4 ">
+            <div class="info-table">
+                <ul>
+                    <li>
+                        <img src="~/imagens/info-icon-01.png" alt="" style="max-width: 52px;">
+                        <h4>600 m²<br><span>Espaço Total</span></h4>
+                    </li>
+                    <li>
+                        <img src="~/imagens/info-icon-02.png" alt="" style="max-width: 52px;">
+                        <h4>Contrato<br><span>Pronto para Contrato</span></h4>
+                    </li>
+              
+                    <li> 
+                        <img src="~/imagens/info-icon-03.png" alt="" style="max-width: 52px;">
+                        <h4>Pagamento<br><span>Processo de Pagamento</span></h4>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="video-frame">
+               
+                <img src="~/imagens/video-frame.jpg" alt="Imagem do vídeo" class="video-background">
+
+                
+                <a href="https://youtube.com/watch?v=SEU_VIDEO_ID" target="_blank" class="play-button">
+                    <i class="fa fa-play"></i>
+                </a>
+            </div>
         </div>
     </div>
 </div>
