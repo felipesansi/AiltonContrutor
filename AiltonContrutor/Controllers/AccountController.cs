@@ -64,7 +64,7 @@ namespace AiltonContrutor.Controllers
         public async Task<IActionResult> Logout()
         {
             HttpContext.Session.Clear(); // Limpa a sessão
-            HttpContext.User = new ClaimsPrincipal(new ClaimsIdentity());  // Limpa o usuário autenticado
+            HttpContext.User = null; // Limpa o usuário autenticado
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
