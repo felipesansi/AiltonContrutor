@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Servicos\**" />
     <Compile Remove="Views\ImovelController1\**" />
+    <Content Remove="Areas\Admin\Servicos\**" />
     <Content Remove="Views\ImovelController1\**" />
+    <EmbeddedResource Remove="Areas\Admin\Servicos\**" />
     <EmbeddedResource Remove="Views\ImovelController1\**" />
+    <None Remove="Areas\Admin\Servicos\**" />
     <None Remove="Views\ImovelController1\**" />
   </ItemGroup>
 
@@ -26,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Servicos\" />
     <Folder Include="Models\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\js\" />
