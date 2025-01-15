@@ -99,3 +99,13 @@ div .central {
     background-color: rgba(0, 0, 0, 0.7);
 
 }
+
+.btn-login{
+border-color:black;
+
+}
+    .btn-login:hover {
+        background-color: whitesmoke;
+
+        
+    }
