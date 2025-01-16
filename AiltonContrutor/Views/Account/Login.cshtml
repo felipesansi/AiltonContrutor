@@ -5,16 +5,15 @@
 }
 
 <div class="container">
-    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+    <div class="row justify-content-center align-items-center " style="height: 100vh;">
         <div class="col-md-4">
             
-            <form asp-action="Login" method="post" class="p-4 border rounded bg-light shadow-sm">
+            <form asp-action="Login" method="post" class="card border-0 shadow p-4">
                 <div class="text-center">
                     <img src="~/imagens/Logo header.png" alt="Logo" class="mb-4" width="200" height="60" />
                     <h2 class="h6 fw-bold">Login Administrativo</h2>
                 </div>
 
-                <!-- Exibe o alerta apenas se houver erros -->
                 @if (ViewData.ModelState.ErrorCount > 0)
                 {
                     <div asp-validation-summary="All" class="alert alert-danger" role="alert"></div>

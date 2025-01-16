@@ -44,6 +44,7 @@ builder.Services.AddSession(options =>
     options.Cookie.Name = ".AiltonConstrutor.Session"; // Nome do cookie de sessão
 });
 
+
 var app = builder.Build();
 
 // Configure o pipeline HTTP
