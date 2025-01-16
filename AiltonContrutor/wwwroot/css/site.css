@@ -99,13 +99,58 @@ div .central {
     background-color: rgba(0, 0, 0, 0.7);
 
 }
-
-.btn-login{
+.btn-login
+{
 border-color:black;
+}
+ 
+.btn-login:hover 
+{
+   background-color: whitesmoke;
+}
+ 
+.btn-login:active {
+  background-color: red;
 
 }
-    .btn-login:hover {
-        background-color: whitesmoke;
 
-        
+.contato-page {
+    background-image: url(../imagens/page-heading-bg.jpg);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 110px 0px;
+    text-align: center;
+}
+
+.card {
+    border-radius: 8px; /* Bordas arredondadas */
+    transition: transform 0.2s; /* Animação ao passar o mouse */
+}
+
+   
+
+.card-title {
+    font-size: 20px;
+    color: #333;
+}
+
+.card-text {
+    font-size: 16px;
+    color: #555;
+}
+
+
+@media (max-width: 768px) {
+    .card i {
+        font-size: 48px; /* Reduz tamanho do ícone */
     }
+
+    .card-title {
+        font-size: 18px; /* Ajusta tamanho do título */
+    }
+
+    .card-text {
+        font-size: 14px; /* Ajusta tamanho do texto */
+    }
+}
