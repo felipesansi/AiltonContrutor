@@ -28,5 +28,10 @@ namespace AiltonContrutor.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public ActionResult Agradecimento()
+        {
+            return View();
+        }
+
     }
 }
