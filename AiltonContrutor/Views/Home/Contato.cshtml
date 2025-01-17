@@ -1,7 +1,4 @@
-﻿@addTagHelper *, AiltonContrutor
-
-
-@{
+﻿@{
     ViewBag.Title = "Contato";
 }
 
@@ -15,24 +12,79 @@
         <h1 class="text-center">Contato</h1>
     </div>
 </div>
-<p> Entre em contato conosco para mais informações.</p>
+<h2 class="text-center m-4">Entre em contato conosco para mais informações.</h2>
+<p class="text-center">Estamos disponíveis para atendê-lo da melhor forma possível.</p>
 <div class="container my-5">
     <div class="row">
         <!-- Card de Contato -->
-        <div class="col-12 col-sm-6 col-md-4 text-center">
-            <div class="card border-0 shadow p-4">
-                <i class="fa-solid fa-phone text-danger" style="font-size: 58px;"></i>
+        <div class="col-12 col-sm-6 col-md-4 text-center mb-4">
+            <div class="card border-0 shadow p-5">
+                
+                <i class="fa-solid fa-phone text-success" style="font-size: 58px;"></i>
                 <h5 class="card-title mt-3">Telefone</h5>
                 <p class="card-text">(11) 91789-8502</p>
+                <a href="https://api.whatsapp.com/send?phone=5511917898502&text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20suas%20obras!" target="_blank" class="btn btn-success">Enviar mensagem</a>
             </div>
         </div>
-        
+
+        <div class="col-12 col-sm-6 col-md-4 text-center mb-4">
+            <div class="card border-0 shadow p-5">
+                <i class="fa-solid fa-envelope text-primary" style="font-size: 58px;"></i>
+                <h5 class="card-title mt-3">E-mail</h5>
+                <p class="card-text text-decoration-underline text-primary">construtorailton7@gmail.com</p>
+                <a href="#form-contato" class="btn btn-danger">Preencher formulário</a>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 text-center mb-4">
+            <div class="card border-0 shadow p-5">
+                <i class="fa-brands fa-instagram text-info" style="font-size: 58px;"></i>
+                <h5 class="card-title mt-3">Instagram</h5>
+                <p class="card-text text-decoration-underline text-primary">&#64;construtor.ailton</p>
+                <a href="https://www.instagram.com/construtor.ailton/" target="_blank" class="btn btn-primary">Acessar perfil</a>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="text-center">
-    <h2>
-        <email endereco="felipeprofissional22@gmail.com" conteudo="Enviar E-mail" class="email-link"></email>
-    </h2>
-</div>
+<section id="form-contato">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 border-0 shadow p-5">
+                <h2 class="text-center">Formulário de Contato</h2>
+                <form action="https://api.staticforms.xyz/submit" method="post">
+                    <div class="mb-3">
+                        <input type="hidden" name="accessKey" value="a94ec1cc-c379-4512-af57-ae7af4da938b">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Assunto</label>
+                        <input type="text" name="subject" class="form-control" required>
+                    </div>
 
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="text" name="email" class="form-control" required>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="mensagem" class="form-label">Mensagem</label>
+                        <textarea name="message" class="form-control" rows="3" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar e-mail</button>
+                    <input type="hidden" name="redirectTo" value="https://localhost:7209/Home/Agradecimento" /> <!-- URL de redirecionamento
+                    que vai mudar quando colocar no ar -->
+            
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</section>

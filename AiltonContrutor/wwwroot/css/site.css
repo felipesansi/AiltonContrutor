@@ -122,35 +122,3 @@ border-color:black;
     padding: 110px 0px;
     text-align: center;
 }
-
-.card {
-    border-radius: 8px; /* Bordas arredondadas */
-    transition: transform 0.2s; /* Animação ao passar o mouse */
-}
-
-   
-
-.card-title {
-    font-size: 20px;
-    color: #333;
-}
-
-.card-text {
-    font-size: 16px;
-    color: #555;
-}
-
-
-@media (max-width: 768px) {
-    .card i {
-        font-size: 48px; /* Reduz tamanho do ícone */
-    }
-
-    .card-title {
-        font-size: 18px; /* Ajusta tamanho do título */
-    }
-
-    .card-text {
-        font-size: 14px; /* Ajusta tamanho do texto */
-    }
-}
