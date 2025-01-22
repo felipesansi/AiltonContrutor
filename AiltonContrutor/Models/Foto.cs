@@ -1,12 +1,22 @@
-﻿using AiltonConstrutor.Models;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class Foto
+namespace AiltonConstrutor.Models
 {
-    public int Id { get; set; }
-    public string Url { get; set; }
-    public int ImovelId { get; set; }
+    [Table("Foto")]
+    public class Foto
+    {
+        [Key]
+        public int FotoId { get; set; }
 
-    [ForeignKey("ImovelId")]
-    public Imovel Imovel { get; set; }
+        [Required]
+        [StringLength(200)] // Tamanho máximo da URL
+        public string Url { get; set; }
+
+        [Required]
+        public int ImovelId { get; set; } // FK para Imovel
+
+        [ForeignKey("ImovelId")]
+        public Imovel Imovel { get; set; }
+    }
 }

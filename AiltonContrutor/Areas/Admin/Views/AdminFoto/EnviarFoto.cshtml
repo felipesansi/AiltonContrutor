@@ -2,28 +2,32 @@
     ViewData["Title"] = "Enviar Foto";
 }
 
-<h2>Enviar Foto</h2>
-
-@if (ViewData["MensagemSucesso"] != null)
-{
-    <div class="alert alert-success">
-        @ViewData["MensagemSucesso"]
-        <br />
-        <strong>Link da Imagem:</strong> <a href="@ViewData["LinkImagem"]" target="_blank">@ViewData["LinkImagem"]</a>
-    </div>
-}
+<h2>@ViewData["Title"]</h2>
 
 @if (ViewData["MensagemErro"] != null)
 {
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" role="alert">
         @ViewData["MensagemErro"]
     </div>
 }
 
-<form method="post" enctype="multipart/form-data">
+@if (ViewData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewData["MensagemSucesso"]
+        <br />
+        <a href="@ViewData["LinkImagem"]" target="_blank">Ver imagem</a>
+    </div>
+}
+
+<form asp-action="EnviarFoto" method="post" enctype="multipart/form-data">
     <div class="form-group">
-        <label for="foto">Escolha uma imagem:</label>
-        <input type="file" id="foto" name="foto" class="form-control" />
+        <label for="imovelId">ID do Imóvel</label>
+        <input type="number" class="form-control" id="imovelId" name="imovelId" required />
+    </div>
+    <div class="form-group">
+        <label for="foto">Selecione uma imagem</label>
+        <input type="file" class="form-control-file" id="foto" name="foto" accept="image/*" required />
     </div>
     <button type="submit" class="btn btn-primary mt-3">Enviar</button>
 </form>
