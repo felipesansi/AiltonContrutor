@@ -14,5 +14,6 @@ namespace AiltonContrutor.Context
         public DbSet<Imovel> Imoveis { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Video> Videos { get; set; }
+        public ICollection<Foto> Fotos { get; set; } = new List<Foto>();
     }
 }
