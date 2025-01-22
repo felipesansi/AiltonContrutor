@@ -1,19 +1,32 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using AiltonConstrutor.Models;
-using AiltonContrutor.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using AiltonContrutor.Models;
 
 namespace AiltonContrutor.Context
 {
-    public class AppDbContext: IdentityDbContext<IdentityUser>
+    public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
+
         public DbSet<Imovel> Imoveis { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Video> Videos { get; set; }
-        public ICollection<Foto> Fotos { get; set; } = new List<Foto>();
+        public DbSet<Foto> Fotos { get; set; } 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            
+            modelBuilder.Entity<Imovel>()
+                .HasMany(imovel => imovel.Fotos)
+                .WithOne(foto => foto.Imovel)
+                .HasForeignKey(foto => foto.ImovelId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

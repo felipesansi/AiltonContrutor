@@ -54,5 +54,7 @@ namespace AiltonConstrutor.Models
         [ForeignKey("CategoriaId")]
         public required Categoria Categoria { get; set; }
         public ICollection<Video> Videos { get; set; } = new List<Video>();
+        public ICollection<Foto> Fotos { get; set; } = new List<Foto>();
+
     }
 }
