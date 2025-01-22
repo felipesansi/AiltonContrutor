@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Enviar Foto";
+}
+
+<h2>Enviar Foto</h2>
+
+@if (ViewData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success">
+        @ViewData["MensagemSucesso"]
+        <br />
+        <strong>Link da Imagem:</strong> <a href="@ViewData["LinkImagem"]" target="_blank">@ViewData["LinkImagem"]</a>
+    </div>
+}
+
+@if (ViewData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger">
+        @ViewData["MensagemErro"]
+    </div>
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="foto">Escolha uma imagem:</label>
+        <input type="file" id="foto" name="foto" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+</form>
