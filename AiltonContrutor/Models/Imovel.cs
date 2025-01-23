@@ -35,6 +35,7 @@ namespace AiltonConstrutor.Models
         public bool Churrasqueira { get; set; }
 
         [Display(Name = "Existe piscina")]
+
         public bool Piscina { get; set; }
 
         [Display(Name = "Valor do imóvel")]
@@ -52,7 +53,7 @@ namespace AiltonConstrutor.Models
         public int CategoriaId { get; set; } // FK para Categoria
 
         [ForeignKey("CategoriaId")]
-        public required Categoria Categoria { get; set; }
+        public  Categoria ? Categoria { get; set; }
         public ICollection<Video> Videos { get; set; } = new List<Video>();
         public ICollection<Foto> Fotos { get; set; } = new List<Foto>();
 
