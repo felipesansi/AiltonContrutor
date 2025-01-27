@@ -15,7 +15,8 @@ namespace AiltonContrutor.Context
         public DbSet<Imovel> Imoveis { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Video> Videos { get; set; }
-        public DbSet<Foto> Fotos { get; set; } 
+        public DbSet<Foto> Fotos { get; set; }
+        public DbSet<DadosDropBox> DadosDropBox { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
