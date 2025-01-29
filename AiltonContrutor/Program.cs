@@ -28,41 +28,9 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddTransient<IImovel, ImovelRepositorio>();
 builder.Services.AddTransient<ICategoria, CategoriaRepositorio>();
 builder.Services.AddTransient<IVideo, VideoRepositorio>();
-//builder.Services.AddScoped<IUploadFotosService>(provider =>
-//{
-//    // Obtém o refresh token da configuração
-//    var refreshToken = builder.Configuration["Dropbox:RefreshToken"]; // Este valor vem do seu appsettings.json ou de outro local
-
-//    // Obtém o DbContext do contêiner de DI
-//    var appDbContext = provider.GetRequiredService<AppDbContext>();
-
-//    // Obtém o logger do contêiner de DI
-//    var logger = provider.GetRequiredService<ILogger<UploadFotosService>>();
-
-//    // Retorna a instância do UploadFotosService com o refresh token, DbContext e logger
-//    return new UploadFotosService(refreshToken, appDbContext, logger);
-//});
-
+builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
 builder.Services.AddScoped<IUploadFotosService>(provider =>
-{
-    // Obtém o refresh token da configuração
-    var refreshToken = builder.Configuration["Dropbox:RefreshToken"];
-    if (string.IsNullOrEmpty(refreshToken))
-    {
-        throw new InvalidOperationException("O RefreshToken do Dropbox não está configurado no appsettings.json.");
-    }
-
-    // Obtém o DbContext do contêiner de DI
-    var appDbContext = provider.GetRequiredService<AppDbContext>();
-
-    // Obtém o logger do contêiner de DI
-    var logger = provider.GetRequiredService<ILogger<UploadFotosService>>();
-
-    // Retorna a instância do UploadFotosService
-    return new UploadFotosService(refreshToken, appDbContext, logger);
-});
-
-
+    new UploadFotosService("f3wE6nv5vZYAAAAAAAAAAQMz1WSTAzTZBBRYNtNyjRJ1aS89w0ED2dUota1gMXhB", provider.GetRequiredService<AppDbContext>())); // Refresh Token
 
 // Configuração do Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()

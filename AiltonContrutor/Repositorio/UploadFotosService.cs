@@ -1,160 +1,113 @@
-﻿
-using AiltonContrutor.Context;
+﻿using AiltonContrutor.Context;
 using AiltonContrutor.Models;
 using AiltonContrutor.Repositorio.Interfaces;
 using Dropbox.Api;
 using Dropbox.Api.Files;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace AiltonContrutor.Repositorio
 {
     public class UploadFotosService : IUploadFotosService
     {
-        private readonly string _dropBoxToken;
+        private readonly string _appKey = "awlugc5oznmjln8"; // Sua App Key
+        private readonly string _appSecret = "2mb4byq0gtxy9x0"; // Seu App Secret
+        private readonly string _refreshToken; // Seu Refresh Token
+        private string _accessToken; // Access Token atualizado
+        private readonly HttpClient _httpClient;
         private readonly AppDbContext _appDbContext;
-        private readonly ILogger<UploadFotosService> _logger;
 
-        public UploadFotosService(string dropBoxToken, AppDbContext appDbContext, ILogger<UploadFotosService> logger)
+        public UploadFotosService(string refreshToken, AppDbContext appDbContext)
         {
-            _dropBoxToken = dropBoxToken;
+            _refreshToken = refreshToken;
+            _httpClient = new HttpClient();
             _appDbContext = appDbContext;
-            _logger = logger;
         }
 
-    
-
-
-     
         public async Task<string> UploadFileAsync(IFormFile file, string caminho_destino)
         {
-            
-            var dadosDropbox = await RecuperarTokenActivoAsync();
-            if (dadosDropbox == null)
-            {
-                _logger.LogError("Não foi possível encontrar um token válido.");
-                return null;
-            }
+            _accessToken = await ObeterTokenAcessoAsync();
 
-            using (var dbx = new DropboxClient(dadosDropbox.AccessToken))
+            using (var dbx = new DropboxClient(_accessToken))
             {
                 using (var stream = file.OpenReadStream())
                 {
-                   
-                    var resultadoUpload = await dbx.Files.UploadAsync(
+                    // Faz o upload do arquivo para o Dropbox
+                    var Resultado_Upload = await dbx.Files.UploadAsync(
                         caminho_destino,
                         WriteMode.Overwrite.Instance,
                         body: stream);
 
                     // Obtém o link compartilhado para o arquivo carregado
-                    var linkGerado = await dbx.Sharing.CreateSharedLinkWithSettingsAsync(resultadoUpload.PathDisplay);
-                    return linkGerado.Url;
+                    var link_gerado = await dbx.Sharing.CreateSharedLinkWithSettingsAsync(Resultado_Upload.PathDisplay);
+                    return link_gerado.Url;
                 }
             }
         }
 
-        
-        public async Task<DadosDropBox> RecuperarTokenActivoAsync()
+        private async Task<string> ObeterTokenAcessoAsync()
         {
-            var dadosDropbox = await _appDbContext.DadosDropBox.FirstOrDefaultAsync(d => d.DataExpiracao > DateTime.Now);
-            if (dadosDropbox == null)
+            var corpo_requisicao = new Dictionary<string, string>
             {
-                _logger.LogWarning("Token expirado ou inválido. Tentando renovar.");
-            
-                await RenovarTokenAsync();
-                dadosDropbox = await _appDbContext.DadosDropBox.FirstOrDefaultAsync(d => d.DataExpiracao > DateTime.Now);
-            }
-            return dadosDropbox;
-        }
+                { "grant_type", "refresh_token" },
+                { "refresh_token", _refreshToken }
+            };
 
-       
-        private async Task RenovarTokenAsync()
-        {
-         
-            var dadosDropbox = await _appDbContext.DadosDropBox.FirstOrDefaultAsync();
-            if (dadosDropbox == null || string.IsNullOrEmpty(dadosDropbox.RefreshToken))
+            var requisicao = new HttpRequestMessage(HttpMethod.Post, "https://api.dropbox.com/oauth2/token")
             {
-                _logger.LogError("Não há refresh_token disponível.");
-                return;
-            }
+                Content = new FormUrlEncodedContent(corpo_requisicao)
+            };
+
+            var authHeaderValue = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{_appKey}:{_appSecret}"));
+            requisicao.Headers.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
+
+            var resposta = await _httpClient.SendAsync(requisicao);
+            resposta.EnsureSuccessStatusCode();
+
+            var respostaContent = await resposta.Content.ReadAsStringAsync();
+            var tokenResponse = JsonConvert.DeserializeObject<TokenResposta>(respostaContent);
 
            
-            var clientId = "v5msre23zhfmhjw"; 
-            var clientSecret = "snx45r8ftz6gti2"; 
-            var refreshToken = dadosDropbox.RefreshToken;
+            await SalvarTokensAsync(tokenResponse.AccessToken, _refreshToken, tokenResponse.TokenType, DateTime.UtcNow.AddSeconds(tokenResponse.ExpiresIn));
 
-            using (var client = new HttpClient())
-            {
-                var valores = new Dictionary<string, string>
-                {
-                    { "grant_type", "refresh_token" },
-                    { "refresh_token", refreshToken },
-                    { "client_id", clientId },
-                    { "client_secret", clientSecret }
-                };
-
-                var content = new FormUrlEncodedContent(valores); 
-                var response = await client.PostAsync("https://api.dropboxapi.com/oauth2/token", content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseString = await response.Content.ReadAsStringAsync(); // Obtenha a resposta como uma string
-                    var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(responseString);
-
-                  
-                    dadosDropbox.AccessToken = tokenResponse.AccessToken;
-                    dadosDropbox.DataExpiracao = DateTime.Now.AddSeconds(tokenResponse.ExpiresIn);
-                    _appDbContext.DadosDropBox.Update(dadosDropbox);
-                    await _appDbContext.SaveChangesAsync();
-                }
-                else
-                {
-                    _logger.LogError("Erro ao renovar o token. Verifique o refresh_token.");
-                }
-            }
+            return tokenResponse.AccessToken;
         }
 
-        
         public async Task SalvarTokensAsync(string accessToken, string refreshToken, string tokenType, DateTime dataExpiracao)
         {
-            try
+            var tokens = await _appDbContext.DadosDropBox.FirstOrDefaultAsync();
+
+            if (tokens == null)
             {
-                var existeToken = await _appDbContext.DadosDropBox.FirstOrDefaultAsync(d => d.RefreshToken == refreshToken);
-                if (existeToken != null)
+                tokens = new DadosDropBox
                 {
-                    existeToken.AccessToken = accessToken;
-                    existeToken.TokenType = tokenType;
-                    existeToken.DataExpiracao = dataExpiracao;
-                    await _appDbContext.SaveChangesAsync();
-                }
-                else
-                {
-                    var novoToken = new DadosDropBox
-                    {
-                        AccessToken = accessToken,
-                        RefreshToken = refreshToken,
-                        TokenType = tokenType,
-                        DataExpiracao = dataExpiracao
-                    };
-                    _appDbContext.DadosDropBox.Add(novoToken);
-                    await _appDbContext.SaveChangesAsync();
-                }
+                    AccessToken = accessToken,
+                    RefreshToken = refreshToken,
+                    TokenType = tokenType,
+                    DataExpiracao = dataExpiracao
+                };
+                _appDbContext.DadosDropBox.Add(tokens);
             }
-            catch (Exception ex)
+            else
             {
-                _logger.LogError(ex, "Erro ao salvar os tokens.");
+                tokens.AccessToken = accessToken;
+                tokens.RefreshToken = refreshToken;
+                tokens.TokenType = tokenType;
+                tokens.DataExpiracao = dataExpiracao;
+                _appDbContext.DadosDropBox.Update(tokens);
             }
+
+            await _appDbContext.SaveChangesAsync();
+        }
+
+        public async Task<DadosDropBox> RecuperarTokenActivoAsync()
+        {
+            return await _appDbContext.DadosDropBox.FirstOrDefaultAsync();
         }
     }
 
-
-    public class TokenResponse
-    {
-        public string AccessToken { get; set; }
-        public string TokenType { get; set; }
-        public int ExpiresIn { get; set; }
-        public string RefreshToken { get; set; }
-    }
+   
 }
