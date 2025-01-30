@@ -29,8 +29,7 @@ builder.Services.AddTransient<IImovel, ImovelRepositorio>();
 builder.Services.AddTransient<ICategoria, CategoriaRepositorio>();
 builder.Services.AddTransient<IVideo, VideoRepositorio>();
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
-builder.Services.AddScoped<IUploadFotosService>(provider =>
-    new UploadFotosService("f3wE6nv5vZYAAAAAAAAAAQMz1WSTAzTZBBRYNtNyjRJ1aS89w0ED2dUota1gMXhB", provider.GetRequiredService<AppDbContext>())); // Refresh Token
+builder.Services.AddScoped<IUploadFotosService, UploadFotosService>();
 
 // Configuração do Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()

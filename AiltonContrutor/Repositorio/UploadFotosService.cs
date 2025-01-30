@@ -5,24 +5,31 @@ using Dropbox.Api;
 using Dropbox.Api.Files;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 
 namespace AiltonContrutor.Repositorio
 {
     public class UploadFotosService : IUploadFotosService
     {
-        private readonly string _appKey = "awlugc5oznmjln8"; // Sua App Key
-        private readonly string _appSecret = "2mb4byq0gtxy9x0"; // Seu App Secret
-        private readonly string _refreshToken; // Seu Refresh Token
-        private string _accessToken; // Access Token atualizado
+        private readonly string _appKey;
+        private readonly string _appSecret;
+        private readonly string _refreshToken;
+        private string? _accessToken; // Access Token atualizado
         private readonly HttpClient _httpClient;
         private readonly AppDbContext _appDbContext;
 
-        public UploadFotosService(string refreshToken, AppDbContext appDbContext)
+        public UploadFotosService(AppDbContext appDbContext)
         {
-            _refreshToken = refreshToken;
+            // Carrega as variáveis do arquivo .env
+            DotNetEnv.Env.Load();
+
+            _appKey = Environment.GetEnvironmentVariable("DROPBOX_APP_KEY") 
+                ?? throw new InvalidOperationException("DROPBOX_APP_KEY não encontrado.");
+            _appSecret = Environment.GetEnvironmentVariable("DROPBOX_APP_SECRET") 
+                ?? throw new InvalidOperationException("DROPBOX_APP_SECRET não encontrado.");
+            _refreshToken = Environment.GetEnvironmentVariable("DROPBOX_REFRESH_TOKEN") 
+                ?? throw new InvalidOperationException("DROPBOX_REFRESH_TOKEN não encontrado.");
+
             _httpClient = new HttpClient();
             _appDbContext = appDbContext;
         }
@@ -48,6 +55,7 @@ namespace AiltonContrutor.Repositorio
             }
         }
 
+        // Método para obter o token de acesso
         private async Task<string> ObeterTokenAcessoAsync()
         {
             var corpo_requisicao = new Dictionary<string, string>
@@ -60,17 +68,25 @@ namespace AiltonContrutor.Repositorio
             {
                 Content = new FormUrlEncodedContent(corpo_requisicao)
             };
-
+            // Adiciona o cabeçalho de autorização
             var authHeaderValue = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{_appKey}:{_appSecret}"));
             requisicao.Headers.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
 
+            // Envia a requisição
             var resposta = await _httpClient.SendAsync(requisicao);
+
+            // Verifica se a requisição foi bem sucedida
             resposta.EnsureSuccessStatusCode();
 
+            // Desserializa a resposta
             var respostaContent = await resposta.Content.ReadAsStringAsync();
             var tokenResponse = JsonConvert.DeserializeObject<TokenResposta>(respostaContent);
 
-           
+            if (tokenResponse == null)
+            {
+                throw new InvalidOperationException("Falha ao desserializar a resposta do token.");
+            }
+
             await SalvarTokensAsync(tokenResponse.AccessToken, _refreshToken, tokenResponse.TokenType, DateTime.UtcNow.AddSeconds(tokenResponse.ExpiresIn));
 
             return tokenResponse.AccessToken;
@@ -105,9 +121,13 @@ namespace AiltonContrutor.Repositorio
 
         public async Task<DadosDropBox> RecuperarTokenActivoAsync()
         {
-            return await _appDbContext.DadosDropBox.FirstOrDefaultAsync();
+            var token = await _appDbContext.DadosDropBox.FirstOrDefaultAsync();
+
+            if (token == null)
+            {
+                throw new InvalidOperationException("Falha ao recuperar o token.");
+            }
+            return token;
         }
     }
-
-   
 }
