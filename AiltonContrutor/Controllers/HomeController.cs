@@ -1,21 +1,29 @@
 using System.Diagnostics;
+using AiltonConstrutor.Repositorio.Interfaces;
+using AiltonContrutor.Context;
 using AiltonContrutor.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AiltonContrutor.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _context;
+        private readonly IImovel _imovelRepositorio;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, AppDbContext context, IImovel imovelRepositorio)
         {
             _logger = logger;
+            _context = context;
+            _imovelRepositorio = imovelRepositorio;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var imoveis = await _context.Imoveis.ToListAsync();
+            return View(imoveis); // Envia a lista de imóveis para a view principal
         }
 
         public IActionResult Contato()
