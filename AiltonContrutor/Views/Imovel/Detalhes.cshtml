@@ -1,0 +1,17 @@
+﻿@model AiltonConstrutor.Models.Imovel
+
+<h2>@Model.Titulo</h2>
+<p>@Model.Descricao</p>
+<p>Valor: @Model.Valor.ToString("C")</p>
+<p>Banheiros: @Model.Banheiros</p>
+<p>Quartos: @Model.Quartos</p>
+<p>Área Gourmet: @Model.AreaGourmet</p>
+
+@if (Model.Fotos != null && Model.Fotos.Any())
+{
+    @await Html.PartialAsync("_CarrosselFotos", Model.Fotos)
+}
+else
+{
+    <p>Este imóvel ainda não possui fotos.</p>
+}
