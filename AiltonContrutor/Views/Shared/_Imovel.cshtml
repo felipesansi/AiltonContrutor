@@ -1,0 +1,24 @@
+﻿@model List<AiltonConstrutor.Models.Imovel>
+
+<h1 class="text-center mt-5 mb-5">Imóveis</h1>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row justify-content-center">
+        @foreach (var imovel in Model)
+        {
+            <div class="col-md-4 mb-4 d-flex justify-content-center">
+                <div class="card border-0 shadow p-3 text-center d-flex flex-column align-items-center">
+                    <img src="@imovel.ImagemUrl" class="img-fluid" style="width: 300px; height: 300px; object-fit: cover;" alt="Imagem do imóvel">
+                    <h3 class="mt-3">@imovel.Titulo</h3>
+                    <h6 class="mt-2">Valor: @imovel.Valor.ToString("C")</h6>
+                    <p class="mt-2">Descrição: @imovel.Descricao</p>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="text-center">Nenhum imóvel disponível no momento.</p>
+}
