@@ -5,29 +5,28 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using AiltonConstrutor.Models;
 using AiltonContrutor.Context;
 
 namespace AiltonContrutor.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AdminImovelsController : Controller
+    public class AdminVideosController : Controller
     {
         private readonly AppDbContext _context;
 
-        public AdminImovelsController(AppDbContext context)
+        public AdminVideosController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/AdminImovels
+        // GET: Admin/AdminVideos
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Imoveis.Include(i => i.Categoria);
+            var appDbContext = _context.Videos.Include(v => v.Imovel);
             return View(await appDbContext.ToListAsync());
         }
 
-        // GET: Admin/AdminImovels/Details/5
+        // GET: Admin/AdminVideos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,42 +34,42 @@ namespace AiltonContrutor.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var imovel = await _context.Imoveis
-                .Include(i => i.Categoria)
-                .FirstOrDefaultAsync(m => m.IdImovel == id);
-            if (imovel == null)
+            var video = await _context.Videos
+                .Include(v => v.Imovel)
+                .FirstOrDefaultAsync(m => m.IdVideo == id);
+            if (video == null)
             {
                 return NotFound();
             }
 
-            return View(imovel);
+            return View(video);
         }
 
-        // GET: Admin/AdminImovels/Create
+        // GET: Admin/AdminVideos/Create
         public IActionResult Create()
         {
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "CategoriaNome");
+            ViewData["IdImovel"] = new SelectList(_context.Imoveis, "IdImovel", "Descricao");
             return View();
         }
 
-        // POST: Admin/AdminImovels/Create
+        // POST: Admin/AdminVideos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdImovel,Titulo,Descricao,Quartos,Banheiros,AreaGourmet,Churrasqueira,Piscina,Valor,ImagemUrl,ImagemThumbnailUrl,StatusImovel,MetragemImovel,Endereco,CategoriaId")] Imovel imovel)
+        public async Task<IActionResult> Create([Bind("IdVideo,IdImovel,Url")] Video video)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(imovel);
+                _context.Add(video);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "CategoriaNome", imovel.CategoriaId);
-            return View(imovel);
+            ViewData["IdImovel"] = new SelectList(_context.Imoveis, "IdImovel", "Descricao", video.IdImovel);
+            return View(video);
         }
 
-        // GET: Admin/AdminImovels/Edit/5
+        // GET: Admin/AdminVideos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,23 +77,23 @@ namespace AiltonContrutor.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var imovel = await _context.Imoveis.FindAsync(id);
-            if (imovel == null)
+            var video = await _context.Videos.FindAsync(id);
+            if (video == null)
             {
                 return NotFound();
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "CategoriaNome", imovel.CategoriaId);
-            return View(imovel);
+            ViewData["IdImovel"] = new SelectList(_context.Imoveis, "IdImovel", "Descricao", video.IdImovel);
+            return View(video);
         }
 
-        // POST: Admin/AdminImovels/Edit/5
+        // POST: Admin/AdminVideos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdImovel,Titulo,Descricao,Quartos,Banheiros,AreaGourmet,Churrasqueira,Piscina,Valor,ImagemUrl,ImagemThumbnailUrl,StatusImovel,MetragemImovel,Endereco,CategoriaId")] Imovel imovel)
+        public async Task<IActionResult> Edit(int id, [Bind("IdVideo,IdImovel,Url")] Video video)
         {
-            if (id != imovel.IdImovel)
+            if (id != video.IdVideo)
             {
                 return NotFound();
             }
@@ -103,12 +102,12 @@ namespace AiltonContrutor.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(imovel);
+                    _context.Update(video);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ImovelExists(imovel.IdImovel))
+                    if (!VideoExists(video.IdVideo))
                     {
                         return NotFound();
                     }
@@ -119,11 +118,11 @@ namespace AiltonContrutor.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "CategoriaNome", imovel.CategoriaId);
-            return View(imovel);
+            ViewData["IdImovel"] = new SelectList(_context.Imoveis, "IdImovel", "Descricao", video.IdImovel);
+            return View(video);
         }
 
-        // GET: Admin/AdminImovels/Delete/5
+        // GET: Admin/AdminVideos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,35 +130,35 @@ namespace AiltonContrutor.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var imovel = await _context.Imoveis
-                .Include(i => i.Categoria)
-                .FirstOrDefaultAsync(m => m.IdImovel == id);
-            if (imovel == null)
+            var video = await _context.Videos
+                .Include(v => v.Imovel)
+                .FirstOrDefaultAsync(m => m.IdVideo == id);
+            if (video == null)
             {
                 return NotFound();
             }
 
-            return View(imovel);
+            return View(video);
         }
 
-        // POST: Admin/AdminImovels/Delete/5
+        // POST: Admin/AdminVideos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var imovel = await _context.Imoveis.FindAsync(id);
-            if (imovel != null)
+            var video = await _context.Videos.FindAsync(id);
+            if (video != null)
             {
-                _context.Imoveis.Remove(imovel);
+                _context.Videos.Remove(video);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ImovelExists(int id)
+        private bool VideoExists(int id)
         {
-            return _context.Imoveis.Any(e => e.IdImovel == id);
+            return _context.Videos.Any(e => e.IdVideo == id);
         }
     }
 }

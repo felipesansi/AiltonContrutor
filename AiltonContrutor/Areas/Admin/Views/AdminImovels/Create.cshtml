@@ -12,7 +12,9 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
             <div class="form-group">
+
                 <label asp-for="Titulo" class="control-label"></label>
                 <input asp-for="Titulo" class="form-control" />
                 <span asp-validation-for="Titulo" class="text-danger"></span>
@@ -53,17 +55,26 @@
                 <span asp-validation-for="Valor" class="text-danger"></span>
             </div>
 
-        
             <div class="form-group">
-                <label asp-for="StatusImovel" class="form-label">Status do Imóvel</label>
-                <select class="form-select" asp-for="StatusImovel">
-                    <option value="">Selecione uma opção!</option>
-                    <option value="A venda">A venda</option>
-                    <option value="Em construção">Em construção</option>
+                <label for="StatusImovel">Status do Imóvel:</label>
+                <select asp-for="StatusImovel" class="form-control" aria-label="Selecione o status do imóvel">
+                    <option value="A venda">À venda</option>
+                    <option value="Em construcao">Em construção</option>
                 </select>
-                <span asp-validation-for="StatusImovel" class="text-danger"></span>
             </div>
 
+
+            <div class="form-group">
+                <label asp-for="MetragemImovel" class="control-label"></label>
+                <input asp-for="MetragemImovel" class="form-control" />
+                <span asp-validation-for="MetragemImovel" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Endereco" class="control-label"></label>
+                <input asp-for="Endereco" class="form-control" />
+                <span asp-validation-for="Endereco" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="CategoriaId" class="control-label"></label>
                 <select asp-for="CategoriaId" class ="form-control" asp-items="ViewBag.CategoriaId"></select>

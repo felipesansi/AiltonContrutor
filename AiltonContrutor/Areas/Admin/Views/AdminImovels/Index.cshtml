@@ -4,98 +4,43 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista de Imóveis</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Adicionar Novo Imóvel</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quartos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Banheiros)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AreaGourmet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Churrasqueira)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Piscina)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Valor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImagemUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImagemThumbnailUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StatusImovel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quartos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Banheiros)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AreaGourmet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Churrasqueira)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Piscina)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Valor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImagemUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImagemThumbnailUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatusImovel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoria.CategoriaNome)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdImovel">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdImovel">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdImovel">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title">@item.Titulo</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Descrição:</strong> @item.Descricao</p>
+                    <p><strong>Quartos:</strong> @item.Quartos | <strong>Banheiros:</strong> @item.Banheiros</p>
+                    <p><strong>Área Gourmet:</strong> @(item.AreaGourmet ? "Sim" : "Não")</p>
+                    <p><strong>Churrasqueira:</strong> @(item.Churrasqueira ? "Sim" : "Não")</p>
+                    <p><strong>Piscina:</strong> @(item.Piscina ? "Sim" : "Não")</p>
+                    <p><strong>Valor:</strong> @item.Valor.ToString("C")</p>
+                    <p><strong>Metragem:</strong> @item.MetragemImovel m²</p>
+                    <p><strong>Endereço:</strong> @item.Endereco</p>
+                    <p><strong>Status:</strong> @item.StatusImovel</p>
+                    <p><strong>Categoria:</strong> @item.Categoria.CategoriaNome</p>
+
+                    @if (!string.IsNullOrEmpty(item.ImagemThumbnailUrl))
+                    {
+                        <img src="@item.ImagemThumbnailUrl" class="img-fluid rounded" alt="Imagem do imóvel">
+                    }
+                </div>
+                <div class="card-footer text-center">
+                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.IdImovel">Editar</a>
+                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.IdImovel">Detalhes</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.IdImovel">Excluir</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -37,7 +37,7 @@ namespace AiltonConstrutor.Models
         [Display(Name = "Existe piscina")]
 
         public bool Piscina { get; set; }
-
+        [Required]
         [Display(Name = "Valor do imóvel")]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Valor { get; set; }
@@ -49,6 +49,13 @@ namespace AiltonConstrutor.Models
 
         [Display(Name = "Status do Imóvel")]
         public string? StatusImovel { get; set; }
+        [Required]
+        [Display(Name = "Metragem do Imóvel")]
+        [Range(100, int.MaxValue, ErrorMessage = "A metragem do imóvel deve ser de pelo menos 100.")]
+        public int MetragemImovel { get; set; }
+
+        [Display(Name = "Endereço do Imóvel")]
+        public string? Endereco { get; set; }
 
         public int CategoriaId { get; set; } // FK para Categoria
 
