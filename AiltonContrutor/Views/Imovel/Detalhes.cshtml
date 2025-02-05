@@ -1,12 +1,26 @@
 ﻿@model AiltonConstrutor.Models.Imovel
 
-<h2>@Model.Titulo</h2>
-<p>@Model.Descricao</p>
-<p>Valor: @Model.Valor.ToString("C")</p>
-<p>Banheiros: @Model.Banheiros</p>
-<p>Quartos: @Model.Quartos</p>
-<p>Área Gourmet: @Model.AreaGourmet</p>
 
+
+
+ <div class="card">
+     <div class="card-body">
+         <h2>@Model.Titulo</h2>
+         <p>Descrição: <strong>@Model.Descricao</strong></p>
+         <p>Valor: @Model.Valor.ToString("C")</p>
+         <p>Banheiros: @Model.Banheiros</p>
+         <p>Quartos: @Model.Quartos</p>
+         <p>Área Gourmet: @(Model.AreaGourmet ? "Sim" : "Não")</p>
+         <p>Churrasqueira: @(Model.Churrasqueira ? "Sim" : "Não")</p>
+         <p>Piscina: @(Model.Piscina ? "Sim" : "Não")</p>
+        <p>Status: @Model.StatusImovel</p>
+        <p>Endereço: @Model.Endereco</p>
+        <p>metragem: @Model.MetragemImovel</p>
+
+     </div>
+ </div>
+
+ 
 @if (Model.Fotos != null && Model.Fotos.Any())
 {
     @await Html.PartialAsync("_CarrosselFotos", Model.Fotos)
