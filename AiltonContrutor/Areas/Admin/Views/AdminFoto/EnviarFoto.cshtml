@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Imovel
+
+@{
     ViewData["Title"] = "Enviar Foto";
 }
 
@@ -22,8 +24,9 @@
 
 <form asp-action="EnviarFoto" method="post" enctype="multipart/form-data">
     <div class="form-group">
-        <label for="imovelId">ID do Imóvel</label>
-        <input type="number" class="form-control" id="imovelId" name="imovelId" required />
+        <label for="imovelId">Selecione o Imóvel</label>
+        @Html.DropDownList("ImovelId", (SelectList)ViewData["ListaImovel"], "Selecione o Imóvel", new { @class = "form-control" })
+
     </div>
     <div class="form-group">
         <label for="foto">Selecione uma imagem</label>
@@ -31,3 +34,4 @@
     </div>
     <button type="submit" class="btn btn-primary mt-3">Enviar</button>
 </form>
+

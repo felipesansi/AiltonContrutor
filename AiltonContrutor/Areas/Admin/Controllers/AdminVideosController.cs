@@ -48,7 +48,7 @@ namespace AiltonContrutor.Areas.Admin.Controllers
         // GET: Admin/AdminVideos/Create
         public IActionResult Create()
         {
-            ViewData["IdImovel"] = new SelectList(_context.Imoveis, "IdImovel", "Descricao");
+            ViewData["IdImovel"] = new SelectList(_context.Imoveis, "IdImovel", "Titulo");
             return View();
         }
 

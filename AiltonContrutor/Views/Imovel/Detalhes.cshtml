@@ -20,12 +20,19 @@
      </div>
  </div>
 
+<h1 class="text-center p-4">Fotos do imovel</h1>
+
  
-@if (Model.Fotos != null && Model.Fotos.Any())
-{
-    @await Html.PartialAsync("_CarrosselFotos", Model.Fotos)
-}
-else
-{
-    <p>Este imóvel ainda não possui fotos.</p>
-}
+<div class="container">
+    
+        @if (Model.Fotos != null && Model.Fotos.Any())
+        {
+            @await Html.PartialAsync("_CarrosselFotos", Model.Fotos)
+        }
+        else
+        {
+            <p>Este imóvel ainda não possui fotos.</p>
+        }
+
+
+</div>
