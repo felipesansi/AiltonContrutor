@@ -35,9 +35,6 @@ body {
 }
 
 
-
-
-
 div .central {
     position: relative;
     background-color: #343a40;
@@ -57,24 +54,27 @@ div .central {
         left: 0;
         opacity: 0.5
     }
-
 .video-frame {
     position: relative;
-    display: inline-block;
-    cursor: pointer;
-    overflow: hidden; 
-    border-radius: 8px; 
-    background-color: #000000c4;
-    margin-top:100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    margin-top: 100px;
 }
 
 .video-background {
-    display: block;
     width: 100%;
     height: auto;
-    opacity: 0.8; 
-    background-color: black; 
-    mix-blend-mode: multiply;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+    filter: brightness(0.6);
+}
+
+.video-frame:hover .video-background {
+    transform: scale(1.05);
+    filter: brightness(0.8);
 }
 
 .play-button {
@@ -82,23 +82,27 @@ div .central {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-decoration: none;
-    color: white;
-    font-size: 3rem;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 80px;
     height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
+    background: linear-gradient(135deg, #ff0000, #ff7300);
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.6);
 }
 
-.play-button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
+    .play-button i {
+        color: white;
+        font-size: 36px;
+    }
 
-}
+    .play-button:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0px 0px 30px rgba(255, 0, 0, 0.8);
+    }
+
 .btn-login
 {
 border-color:black;
