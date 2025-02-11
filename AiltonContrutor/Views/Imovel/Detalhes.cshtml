@@ -1,11 +1,13 @@
 ﻿@model AiltonConstrutor.Models.Imovel
 
+  
 
-
-
+<div class="card-propiedade-detalhe" style="background-image:url(@Model.ImagemUrl)">
+    <h2 class="text-white p-4">@Model.Titulo</h2>
+</div>
  <div class="card">
      <div class="card-body">
-         <h2>@Model.Titulo</h2>
+       
          <p>Descrição: <strong>@Model.Descricao</strong></p>
          <p>Valor: @Model.Valor.ToString("C")</p>
          <p>Banheiros: @Model.Banheiros</p>

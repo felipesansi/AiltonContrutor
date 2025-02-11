@@ -1,33 +1,34 @@
-html {
-  font-size: 14px;
+html 
+{
+    position: relative;
+    min-height: 100%;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
+
+   
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+    color: var(--bs-secondary-color);
+    text-align: end;
 }
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+    text-align: start;
 }
 
 .info-table li {
@@ -54,30 +55,61 @@ div .central {
         left: 0;
         opacity: 0.5
     }
-.video-frame {
+
+.btn-login {
+    border-color: black;
+}
+
+    .btn-login:hover {
+        background-color: whitesmoke;
+    }
+
+    .btn-login:active {
+        background-color: red;
+    }
+
+.contato-page {
+    background-image: url(../imagens/page-heading-bg.jpg);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 110px 0px;
+    text-align: center;
+}
+
+.video-secao {
+    background-image: url(../imagens/video-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    padding: 100px 0px 250px 0px;
+    position: relative;
+}
+
+.quadro-video {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+   
     margin-top: 100px;
 }
 
-.video-background {
+.video-fundo {
     width: 100%;
     height: auto;
     transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
     filter: brightness(0.6);
 }
 
-.video-frame:hover .video-background {
+.quadro-video:hover .video-fundo {
     transform: scale(1.05);
     filter: brightness(0.8);
 }
 
-.play-button {
+.botao-play {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -93,32 +125,29 @@ div .central {
     box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.6);
 }
 
-    .play-button i {
+    .botao-play i {
         color: white;
         font-size: 36px;
     }
 
-    .play-button:hover {
+    .botao-play:hover {
         transform: translate(-50%, -50%) scale(1.1);
         box-shadow: 0px 0px 30px rgba(255, 0, 0, 0.8);
     }
 
-.btn-login
+.btn-login 
 {
-border-color:black;
-}
- 
-.btn-login:hover 
-{
-   background-color: whitesmoke;
-}
- 
-.btn-login:active {
-  background-color: red;
-
+    border-color: black;
 }
 
-.contato-page {
+
+    .btn-login:hover {
+        background-color: whitesmoke !important;
+    }
+
+
+.contato-pagina 
+{
     background-image: url(../imagens/page-heading-bg.jpg);
     background-position: center bottom;
     background-repeat: no-repeat;
@@ -126,3 +155,80 @@ border-color:black;
     padding: 110px 0px;
     text-align: center;
 }
+
+.video-secao 
+{
+    background-image: url(../imagens/video-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    padding: 100px 0px 250px 0px;
+    position: relative;
+}
+
+.conteudo-video {
+    margin-top: -240px;
+}
+
+.video-secao .cabecalho-secao h2 {
+    color: #fff;
+}
+
+.conteudo-video .quadro-video {
+    position: relative;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15); 
+    margin: -5px;
+}
+
+
+    .conteudo-video .quadro-video img 
+    {
+        border-radius: 10px;
+    }
+
+    .conteudo-video .quadro-video a {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-26px, -26px);
+        width: 52px;
+        height: 52px;
+        background-color: #fff;
+        border-radius: 10%;
+        display: inline-block;
+        text-align: center;
+        line-height: 52px;
+        color: darkblue;
+        outline: 15px solid rgba(254, 85, 37, 0.5);
+        font-size: 18px;
+    }
+.card-propiedade-detalhe 
+{
+  
+    position: relative;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+}
+.card-propiedade-detalhe::before 
+{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
+}
+
+.card-propiedade-imovel {
+    position: relative;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+    .card-propiedade-imovel::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
+    }
+
