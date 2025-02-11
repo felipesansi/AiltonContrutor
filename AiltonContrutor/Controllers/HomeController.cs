@@ -40,6 +40,10 @@ namespace AiltonContrutor.Controllers
         {
             return View();
         }
+        public ActionResult Eps()
+        {
+            return View();
+        }
 
     }
 }
