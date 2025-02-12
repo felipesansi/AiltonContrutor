@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AiltonContrutor.Context;
+using AiltonConstrutor.Models;
 
 namespace AiltonContrutor.Areas.Admin.Controllers
 {
@@ -59,12 +60,36 @@ namespace AiltonContrutor.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdVideo,IdImovel,Url")] Video video)
         {
+            if (!string.IsNullOrEmpty(video.Url))
+            {
+                if (video.Url.Contains("https://youtube.com/shorts/"))
+                {
+                    video.Url = video.Url.Replace("https://youtube.com/shorts/", "https://www.youtube.com/embed/");
+                }
+                else if (video.Url.Contains("https://youtu.be/"))
+                {
+                    video.Url = video.Url.Replace("https://youtu.be/", "https://www.youtube.com/embed/");
+                }
+                else if (video.Url.Contains("https://www.youtube.com/watch?v="))
+                {
+                    video.Url = video.Url.Replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+                }
+
+                // Se houver parâmetros extras, mantém apenas o ID do vídeo
+                int index = video.Url.IndexOf("&");
+                if (index != -1)
+                {
+                    video.Url = video.Url.Substring(0, index);
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(video);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["IdImovel"] = new SelectList(_context.Imoveis, "IdImovel", "Descricao", video.IdImovel);
             return View(video);
         }

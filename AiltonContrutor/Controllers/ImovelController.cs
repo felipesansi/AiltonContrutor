@@ -19,15 +19,27 @@ namespace AiltonContrutor.Controllers
         }
         public async Task<IActionResult> Detalhes(int id)
         {
-            var imovel = await _context.Imoveis
-                .Include(i => i.Fotos) // Carrega as fotos associadas ao imóvel
-                .FirstOrDefaultAsync(i => i.IdImovel == id);
+            try
+            {
+                var imovel = await _context.Imoveis
+                    .Include(i => i.Fotos) // Carrega as fotos associadas ao imóvel
+                    .Include(i => i.Videos) // Carrega os vídeos associadas ao imóvel
+                    .FirstOrDefaultAsync(i => i.IdImovel == id);
 
-            if (imovel == null)
-                return NotFound();
+                if (imovel == null)
+                    return NotFound();
 
-            return View(imovel);
+                var videosImovel = imovel.Videos; 
+
+                return View(imovel);
+            }
+            catch (Exception ex)
+            {
+     
+                return StatusCode(500, "Ocorreu um erro ao carregar os dados do imóvel.");
+            }
         }
+
 
     }
 }

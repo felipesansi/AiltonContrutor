@@ -1,40 +1,65 @@
 ﻿@model AiltonConstrutor.Models.Imovel
 
-  
-
 <div class="card-propiedade-detalhe" style="background-image:url(@Model.ImagemUrl)">
     <h2 class="text-white p-4">@Model.Titulo</h2>
 </div>
- <div class="card">
-     <div class="card-body">
-       
-         <p>Descrição: <strong>@Model.Descricao</strong></p>
-         <p>Valor: @Model.Valor.ToString("C")</p>
-         <p>Banheiros: @Model.Banheiros</p>
-         <p>Quartos: @Model.Quartos</p>
-         <p>Área Gourmet: @(Model.AreaGourmet ? "Sim" : "Não")</p>
-         <p>Churrasqueira: @(Model.Churrasqueira ? "Sim" : "Não")</p>
-         <p>Piscina: @(Model.Piscina ? "Sim" : "Não")</p>
-        <p>Status: @Model.StatusImovel</p>
-        <p>Endereço: @Model.Endereco</p>
-        <p>metragem: @Model.MetragemImovel</p>
 
-     </div>
- </div>
+<div class="card">
+    <div class="card-body">
+        <p><strong>Descrição:</strong> @Model.Descricao</p>
+        <p><strong>Valor:</strong> @Model.Valor.ToString("C")</p>
+        <p><strong>Banheiros:</strong> @Model.Banheiros</p>
+        <p><strong>Quartos:</strong> @Model.Quartos</p>
+        <p><strong>Área Gourmet:</strong> @(Model.AreaGourmet ? "Sim" : "Não")</p>
+        <p><strong>Churrasqueira:</strong> @(Model.Churrasqueira ? "Sim" : "Não")</p>
+        <p><strong>Piscina:</strong> @(Model.Piscina ? "Sim" : "Não")</p>
+        <p><strong>Status:</strong> @Model.StatusImovel</p>
+        <p><strong>Endereço:</strong> @Model.Endereco</p>
+        <p><strong>Metragem:</strong> @Model.MetragemImovel</p>
+    </div>
+</div>
 
-<h1 class="text-center p-4">Fotos do imovel</h1>
+<h2 class="text-center p-4">Fotos do Imóvel</h2>
 
- 
 <div class="container">
-    
-        @if (Model.Fotos != null && Model.Fotos.Any())
-        {
-            @await Html.PartialAsync("_CarrosselFotos", Model.Fotos)
-        }
-        else
-        {
-            <p>Este imóvel ainda não possui fotos.</p>
-        }
+    @if (Model.Fotos != null && Model.Fotos.Any())
+    {
+        @await Html.PartialAsync("_CarrosselFotos", Model.Fotos)
+    }
+    else
+    {
+        <p class="text-center">Este imóvel ainda não possui fotos.</p>
+    }
 
+    <h2 class="text-center p-4">Vídeos do Imóvel</h2>
 
+    @if (Model.Videos != null && Model.Videos.Any())
+    {
+        <div class="row">
+            <div class="col-12 mb-4">
+                <!-- Exibir primeiro vídeo automaticamente -->
+                @if (Model.Videos.FirstOrDefault() != null)
+                {
+                    <div class="ratio ratio-16x9">
+                        <iframe src="@Model.Videos.First().Url?autoplay=1&mute=1"
+                                frameborder="0"
+                                allow="autoplay; encrypted-media"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                }
+            </div>
+
+            @foreach (var video in Model.Videos.Skip(1)) // Exibir os outros vídeos abaixo
+            {
+                <div class="col-md-6 mb-4">
+                    @await Html.PartialAsync("_Video", video)
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-center">Este imóvel ainda não possui vídeos.</p>
+    }
 </div>
