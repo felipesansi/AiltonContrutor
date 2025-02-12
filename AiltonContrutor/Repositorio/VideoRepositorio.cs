@@ -1,4 +1,5 @@
 ﻿
+using AiltonConstrutor.Models;
 using AiltonConstrutor.Repositorio.Interfaces;
 using AiltonContrutor.Context;
 using Microsoft.EntityFrameworkCore;
