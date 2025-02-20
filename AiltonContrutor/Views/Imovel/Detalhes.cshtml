@@ -1,44 +1,85 @@
 ﻿@model AiltonConstrutor.Models.Imovel
 
-<div class="card-propiedade-detalhe" style="background-image:url(@Model.ImagemUrl)">
-    <h2 class="text-white p-4">@Model.Titulo</h2>
-</div>
 
-<div class="card">
-    <div class="card-body">
-        <p><strong>Descrição:</strong> @Model.Descricao</p>
-        <p><strong>Valor:</strong> @Model.Valor.ToString("C")</p>
-        <p><strong>Banheiros:</strong> @Model.Banheiros</p>
-        <p><strong>Quartos:</strong> @Model.Quartos</p>
-        <p><strong>Área Gourmet:</strong> @(Model.AreaGourmet ? "Sim" : "Não")</p>
-        <p><strong>Churrasqueira:</strong> @(Model.Churrasqueira ? "Sim" : "Não")</p>
-        <p><strong>Piscina:</strong> @(Model.Piscina ? "Sim" : "Não")</p>
-        <p><strong>Status:</strong> @Model.StatusImovel</p>
-        <p><strong>Endereço:</strong> @Model.Endereco</p>
-        <p><strong>Metragem:</strong> @Model.MetragemImovel</p>
+<div class="contato-page bg-dark text-white py-5">
+    <div class="container">
+        <h1 class="text-center">Detalhes do imóvel</h1>
     </div>
-</div>
+    </div>
+<div class="container mt-5">
+    <div class="row">
 
-<h2 class="text-center p-4">Fotos do Imóvel</h2>
+        <div class="col-lg-8">
+            <div class="property-image">
+                @if (Model.Fotos != null && Model.Fotos.Any())
+                {
+                    @await Html.PartialAsync("_CarrosselFotos", Model.Fotos)
+                }
+                else
+                {
+                    <div class="default-image" style="background-image:url('/images/default-property.jpg');"></div>
+                }
+            </div>
+        </div>
 
-<div class="container">
-    @if (Model.Fotos != null && Model.Fotos.Any())
-    {
-        @await Html.PartialAsync("_CarrosselFotos", Model.Fotos)
-    }
-    else
-    {
-        <p class="text-center">Este imóvel ainda não possui fotos.</p>
-    }
+ 
+        <div class="col-lg-4">
+            <div class="property-info p-4 shadow-sm rounded">
+                <h4 class="mb-3"><span class="badge bg-light text-dark">@Model.Categoria</span></h4>
+                <h2 class="fw-bold">@Model.Titulo</h2>
+                <p class="text-muted">@Model.Endereco</p>
 
-    <h2 class="text-center p-4">Vídeos do Imóvel</h2>
+                <ul class="list-unstyled mt-3">
+                    <li class="d-flex align-items-center mb-3">
+                        <i class="fa-solid fa-expand me-2 icon-info"></i> @Model.MetragemImovel m² - Área Total
+                    </li>
+                    <li class="d-flex align-items-center mb-3">
+                        <i class="fa-solid fa-bed me-2 icon-info"></i> @Model.Quartos - Quartos
+                    </li>
+                    <li class="d-flex align-items-center mb-3">
+                        <i class="fa-solid fa-toilet me-2 icon-info"></i> @Model.Banheiros - Banheiros
+                    </li>
 
-    @if (Model.Videos != null && Model.Videos.Any())
-    {
+                    <li class="d-flex align-items-center mb-3">
+                        <i class="fa-solid fa-beer-mug-empty me-2 icon-info"></i> Área Gourmet: @(Model.AreaGourmet ? "Sim" : "Não")
+                    </li>
+
+                    <li class="d-flex align-items-center mb-3">
+                        <i class="fa-solid fa-person-swimming me-2 icon-info"></i> Piscina: @(Model.Piscina ? "Sim" : "Não")
+                    </li>
+
+                    <li class="d-flex align-items-center mb-3 ">
+                        <i class="fa-solid fa-burger me-2 icon-info"></i> Churrasqueira: @(Model.Churrasqueira ? "Sim" : "Não")
+                    </li>
+
+                    @if (Model.StatusImovel != "Vendida")
+                    {
+                        <li class="d-flex align-items-center mb-3">
+                            <i class="fa-solid fa-hand-holding-dollar me-2 icon-info"></i>  @Model.Valor.ToString("C") - Valor de Venda
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
         <div class="row">
+            <div class="col-lg-8">
+                <h2 class="fw-bold mb-3">Sobre este imóvel</h2>
+                <p class="descricao">
+                    @Model.Descricao
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="row py-4">
+        <h2 class="text-center mt-5">Vídeos do Imóvel</h2>
+        @if (Model.Videos != null && Model.Videos.Any())
+        {
             <div class="col-12 mb-4">
-                <!-- Exibir primeiro vídeo automaticamente -->
-                @if (Model.Videos.FirstOrDefault() != null)
+                @if (!string.IsNullOrEmpty(Model.Videos.FirstOrDefault()?.Url))
                 {
                     <div class="ratio ratio-16x9">
                         <iframe src="@Model.Videos.First().Url?autoplay=1&mute=1"
@@ -50,16 +91,18 @@
                 }
             </div>
 
-            @foreach (var video in Model.Videos.Skip(1)) // Exibir os outros vídeos abaixo
+            @foreach (var video in Model.Videos.Skip(1))
             {
                 <div class="col-md-6 mb-4">
                     @await Html.PartialAsync("_Video", video)
                 </div>
             }
-        </div>
-    }
-    else
-    {
-        <p class="text-center">Este imóvel ainda não possui vídeos.</p>
-    }
+        }
+        else
+        {
+            <p class="text-center">Este imóvel ainda não possui vídeos.</p>
+        }
+    </div>
 </div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">

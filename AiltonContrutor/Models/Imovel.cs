@@ -1,4 +1,4 @@
-﻿using AiltonContrutor.Models;
+﻿using CasaFacilEPS.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -51,7 +51,7 @@ namespace AiltonConstrutor.Models
         public string? StatusImovel { get; set; }
         [Required]
         [Display(Name = "Metragem do Imóvel")]
-        [Range(100, int.MaxValue, ErrorMessage = "A metragem do imóvel deve ser de pelo menos 100.")]
+        [Range(50, int.MaxValue, ErrorMessage = "A metragem do imóvel deve ser de pelo menos 100.")]
         public int MetragemImovel { get; set; }
 
         [Display(Name = "Endereço do Imóvel")]

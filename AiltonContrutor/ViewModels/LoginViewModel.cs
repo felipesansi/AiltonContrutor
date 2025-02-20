@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AiltonContrutor.ViewModels
+namespace CasaFacilEPS.ViewModels
 {
     public class LoginViewModel
     {

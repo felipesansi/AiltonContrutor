@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <link rel="stylesheet" href="~/AiltonContrutor.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CasaFacilEPS.styles.css" asp-append-version="true" />
 
 
 </head>
@@ -27,6 +27,9 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item px-4" data-aos="zoom-in-right" data-aos-duration="1500">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item px-4" data-aos="zoom-in-right" data-aos-duration="1500">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="AdminFoto" asp-action="EnviarFoto">Enviar Fotos</a>
                         </li>
                         <li class="nav-item px-4" data-aos="zoom-in-right" data-aos-duration="1500">
@@ -34,14 +37,11 @@
                         </li>
 
                         <li class="nav-item px-4" data-aos="zoom-in-right" data-aos-duration="1500">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="AdminImovels" asp-action="Create">Cadastrar imovel</a>
-                        </li>
-                        <li class="nav-item px-4" data-aos="zoom-in-right" data-aos-duration="1500">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="AdminImovels" asp-action="Index">Listar imóveis</a>
                         </li>
                       
                         <li class="nav-item px-4" data-aos="zoom-in-right" data-aos-duration="1500">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="AdminVideos" asp-action="Index">Videos</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="AdminVideos" asp-action="Index">Listar videos</a>
                           </li>
                     </ul>
                 </div>
@@ -55,10 +55,8 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - AiltonContrutor - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer class="footer">
+        @await Html.PartialAsync("_LayoutFooter")
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

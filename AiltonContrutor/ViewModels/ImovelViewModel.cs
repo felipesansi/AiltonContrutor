@@ -1,6 +1,6 @@
 ﻿using AiltonConstrutor.Models;
 
-namespace AiltonContrutor.ViewModels
+namespace CasaFacilEPS.ViewModels
 {
     public class ImovelViewModel
     {

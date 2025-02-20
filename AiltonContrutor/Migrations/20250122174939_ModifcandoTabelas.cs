@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace AiltonContrutor.Migrations
+namespace CasaFacilEPS.Migrations
 {
     /// <inheritdoc />
     public partial class ModifcandoTabelas : Migration

@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using AiltonContrutor.Models;
+using CasaFacilEPS.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace AiltonContrutor.Repositorio.Interfaces
+namespace CasaFacilEPS.Repositorio.Interfaces
 {
     public interface IUploadFotosService
     {

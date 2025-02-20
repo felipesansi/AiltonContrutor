@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CasaFacilEPS.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250127183810_AdicionarTbToken")]
-    partial class AdicionarTbToken
+    [Migration("20250220185836_CorrigindoErros")]
+    partial class CorrigindoErros
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,11 +73,17 @@ namespace CasaFacilEPS.Migrations
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
 
+                    b.Property<string>("Endereco")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImagemThumbnailUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagemUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MetragemImovel")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Piscina")
                         .HasColumnType("bit");
@@ -101,6 +107,28 @@ namespace CasaFacilEPS.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.ToTable("Imovel");
+                });
+
+            modelBuilder.Entity("AiltonConstrutor.Models.Video", b =>
+                {
+                    b.Property<int>("IdVideo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdVideo"));
+
+                    b.Property<int>("IdImovel")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdVideo");
+
+                    b.HasIndex("IdImovel");
+
+                    b.ToTable("Videos");
                 });
 
             modelBuilder.Entity("CasaFacilEPS.Models.Categoria", b =>
@@ -354,28 +382,6 @@ namespace CasaFacilEPS.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Video", b =>
-                {
-                    b.Property<int>("IdVideo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdVideo"));
-
-                    b.Property<int>("IdImovel")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IdVideo");
-
-                    b.HasIndex("IdImovel");
-
-                    b.ToTable("Videos");
-                });
-
             modelBuilder.Entity("AiltonConstrutor.Models.Foto", b =>
                 {
                     b.HasOne("AiltonConstrutor.Models.Imovel", "Imovel")
@@ -396,6 +402,17 @@ namespace CasaFacilEPS.Migrations
                         .IsRequired();
 
                     b.Navigation("Categoria");
+                });
+
+            modelBuilder.Entity("AiltonConstrutor.Models.Video", b =>
+                {
+                    b.HasOne("AiltonConstrutor.Models.Imovel", "Imovel")
+                        .WithMany("Videos")
+                        .HasForeignKey("IdImovel")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Imovel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -447,17 +464,6 @@ namespace CasaFacilEPS.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Video", b =>
-                {
-                    b.HasOne("AiltonConstrutor.Models.Imovel", "Imovel")
-                        .WithMany("Videos")
-                        .HasForeignKey("IdImovel")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Imovel");
                 });
 
             modelBuilder.Entity("AiltonConstrutor.Models.Imovel", b =>

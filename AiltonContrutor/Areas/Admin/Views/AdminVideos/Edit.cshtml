@@ -1,36 +1,39 @@
 ﻿@model Video
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Vídeo";
 }
 
-<h1>Edit</h1>
+<h1 class="mb-4 text-primary">Editar Vídeo</h1>
 
-<h4>Video</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdVideo" />
-            <div class="form-group">
-                <label asp-for="IdImovel" class="control-label"></label>
-                <select asp-for="IdImovel" class="form-control" asp-items="ViewBag.IdImovel"></select>
-                <span asp-validation-for="IdImovel" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Url" class="control-label"></label>
-                <input asp-for="Url" class="form-control" />
-                <span asp-validation-for="Url" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="card shadow-sm p-4">
+    <h4 class="mb-3 text-secondary">Detalhes do Vídeo</h4>
+    <hr />
+    <div class="row">
+        <div class="col-lg-6 col-md-8">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger d-none"></div>
+                <input type="hidden" asp-for="IdVideo" />
+                <input type="hidden" asp-for="IdImovel" />
+
+                <div class="mb-3">
+                    <label asp-for="IdImovel" class="form-label fw-bold">Imóvel</label>
+                    <select class="form-select" disabled>
+                        <option selected>@(Model.Imovel?.Titulo ?? "N/A")</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Url" class="form-label fw-bold">URL do Vídeo</label>
+                    <input asp-for="Url" class="form-control" placeholder="Cole a URL do vídeo" required />
+                    <span asp-validation-for="Url" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary px-4">💾 Salvar</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">↩ Voltar</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

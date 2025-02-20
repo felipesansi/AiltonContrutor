@@ -4,89 +4,109 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="mb-4 text-primary">Criar Imóvel</h1>
 
-<h4>Imovel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           
-            <div class="form-group">
+<div class="card shadow-sm p-4">
+    <h4 class="mb-3 text-secondary">Detalhes do Imóvel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-lg-6 col-md-8">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger d-none"></div>
 
-                <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" class="form-control" />
-                <span asp-validation-for="Titulo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quartos" class="control-label"></label>
-                <input asp-for="Quartos" class="form-control" />
-                <span asp-validation-for="Quartos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Banheiros" class="control-label"></label>
-                <input asp-for="Banheiros" class="form-control" />
-                <span asp-validation-for="Banheiros" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="AreaGourmet" /> @Html.DisplayNameFor(model => model.AreaGourmet)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Churrasqueira" /> @Html.DisplayNameFor(model => model.Churrasqueira)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Piscina" /> @Html.DisplayNameFor(model => model.Piscina)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Valor" class="control-label"></label>
-                <input asp-for="Valor" class="form-control" />
-                <span asp-validation-for="Valor" class="text-danger"></span>
-            </div>
+                <!-- Título -->
+                <div class="mb-3">
+                    <label asp-for="Titulo" class="form-label fw-bold">Título do Imóvel</label>
+                    <input asp-for="Titulo" class="form-control" placeholder="Digite o título do imóvel" required />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label for="StatusImovel">Status do Imóvel:</label>
-                <select asp-for="StatusImovel" class="form-control" aria-label="Selecione o status do imóvel">
-                    <option value="A venda">À venda</option>
-                    <option value="Em construcao">Em construção</option>
-                </select>
-            </div>
+                <!-- Descrição -->
+                <div class="mb-3">
+                    <label asp-for="Descricao" class="form-label fw-bold">Descrição</label>
+                    <input asp-for="Descricao" class="form-control" placeholder="Digite uma descrição do imóvel" required />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
 
+                <!-- Quartos -->
+                <div class="mb-3">
+                    <label asp-for="Quartos" class="form-label fw-bold">Número de Quartos</label>
+                    <input asp-for="Quartos" class="form-control" placeholder="Quantos quartos?" required />
+                    <span asp-validation-for="Quartos" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="MetragemImovel" class="control-label"></label>
-                <input asp-for="MetragemImovel" class="form-control" />
-                <span asp-validation-for="MetragemImovel" class="text-danger"></span>
-            </div>
+                <!-- Banheiros -->
+                <div class="mb-3">
+                    <label asp-for="Banheiros" class="form-label fw-bold">Número de Banheiros</label>
+                    <input asp-for="Banheiros" class="form-control" placeholder="Quantos banheiros?" required />
+                    <span asp-validation-for="Banheiros" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Endereco" class="control-label"></label>
-                <input asp-for="Endereco" class="form-control" />
-                <span asp-validation-for="Endereco" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoriaId" class="control-label"></label>
-                <select asp-for="CategoriaId" class ="form-control" asp-items="ViewBag.CategoriaId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                <!-- Características -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Características</label>
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="AreaGourmet" />
+                        <label class="form-check-label">Área Gourmet</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="Churrasqueira" />
+                        <label class="form-check-label">Churrasqueira</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="Piscina" />
+                        <label class="form-check-label">Piscina</label>
+                    </div>
+                </div>
+
+                <!-- Valor -->
+                <div class="mb-3">
+                    <label asp-for="Valor" class="form-label fw-bold">Valor</label>
+                    <input asp-for="Valor" class="form-control" placeholder="Informe o valor do imóvel" required />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+
+                <!-- Status -->
+                <div class="mb-3">
+                    <label for="StatusImovel" class="form-label fw-bold">Status do Imóvel</label>
+                    <select asp-for="StatusImovel" class="form-select" aria-label="Selecione o status do imóvel">
+                        <option value="A venda">À venda</option>
+                        <option value="Em construcao">Em construção</option>
+                        <option value="Vendida">Vendida</option>
+                    </select>
+                </div>
+
+                <!-- Metragem -->
+                <div class="mb-3">
+                    <label asp-for="MetragemImovel" class="form-label fw-bold">Metragem do Imóvel</label>
+                    <input asp-for="MetragemImovel" class="form-control" placeholder="Informe a metragem" required />
+                    <span asp-validation-for="MetragemImovel" class="text-danger"></span>
+                </div>
+
+                <!-- Endereço -->
+                <div class="mb-3">
+                    <label asp-for="Endereco" class="form-label fw-bold">Endereço</label>
+                    <input asp-for="Endereco" class="form-control" placeholder="Informe o endereço" required />
+                    <span asp-validation-for="Endereco" class="text-danger"></span>
+                </div>
+
+                <!-- Categoria -->
+                <div class="mb-3">
+                    <label asp-for="CategoriaId" class="form-label fw-bold">Categoria</label>
+                    <select asp-for="CategoriaId" class="form-select" asp-items="ViewBag.CategoriaId" required>
+                        <option value="">Selecione uma categoria</option>
+                    </select>
+                </div>
+
+                <!-- Botão Submit -->
+                <div class="mb-3">
+                    <input type="submit" value="Criar Imóvel" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-outline-secondary">Voltar à Lista</a>
 </div>
-

@@ -1,102 +1,59 @@
 ﻿@model AiltonConstrutor.Models.Imovel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Imóvel";
 }
 
-<h1>Details</h1>
+<h1 class="mb-4">Detalhes do Imóvel</h1>
 
-<div>
-    <h4>Imovel</h4>
-    <hr />
+<div class="card shadow-sm p-4">
+    <h4 class="mb-3">Informações do Imóvel</h4>
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Quartos)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quartos)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Banheiros)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Banheiros)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AreaGourmet)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AreaGourmet)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Churrasqueira)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Churrasqueira)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Piscina)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Piscina)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Valor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Valor)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImagemUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImagemUrl)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImagemThumbnailUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImagemThumbnailUrl)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StatusImovel)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StatusImovel)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MetragemImovel)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MetragemImovel)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Endereco)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Endereco)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.CategoriaNome)
-        </dd>
+        <dt class="col-sm-3">Título</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Titulo)</dd>
+
+        <dt class="col-sm-3">Descrição</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Descricao)</dd>
+
+        <dt class="col-sm-3">Quartos</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Quartos)</dd>
+
+        <dt class="col-sm-3">Banheiros</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Banheiros)</dd>
+
+        <dt class="col-sm-3">Área Gourmet</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.AreaGourmet)</dd>
+
+        <dt class="col-sm-3">Churrasqueira</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Churrasqueira)</dd>
+
+        <dt class="col-sm-3">Piscina</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Piscina)</dd>
+
+        <dt class="col-sm-3">Valor</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Valor)</dd>
+
+        <dt class="col-sm-3">Imagem Principal</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.ImagemUrl)</dd>
+
+        <dt class="col-sm-3">Imagem Thumbnail</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.ImagemThumbnailUrl)</dd>
+
+        <dt class="col-sm-3">Status</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.StatusImovel)</dd>
+
+        <dt class="col-sm-3">Metragem</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.MetragemImovel)</dd>
+
+        <dt class="col-sm-3">Endereço</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Endereco)</dd>
+
+        <dt class="col-sm-3">Categoria</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Categoria.CategoriaNome)</dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdImovel">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model?.IdImovel" class="btn btn-primary">Editar</a>
+    <a asp-action="Index" class="btn btn-outline-secondary">Voltar à Lista</a>
 </div>

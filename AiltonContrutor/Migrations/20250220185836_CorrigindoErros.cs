@@ -5,7 +5,7 @@
 namespace CasaFacilEPS.Migrations
 {
     /// <inheritdoc />
-    public partial class AdicionarFotosAImovel : Migration
+    public partial class CorrigindoErros : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

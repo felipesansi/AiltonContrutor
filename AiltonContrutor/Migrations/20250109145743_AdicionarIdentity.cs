@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace AiltonContrutor.Migrations
+namespace CasaFacilEPS.Migrations
 {
     /// <inheritdoc />
     public partial class AdicionarIdentity : Migration

@@ -1,10 +1,10 @@
 ﻿using AiltonConstrutor.Repositorio.Interfaces;
-using AiltonContrutor.Context;
-using AiltonContrutor.ViewModels;
+using CasaFacilEPS.Context;
+using CasaFacilEPS.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace AiltonContrutor.Controllers
+namespace CasaFacilEPS.Controllers
 {
 
     public class ImovelController : Controller
@@ -36,7 +36,7 @@ namespace AiltonContrutor.Controllers
             catch (Exception ex)
             {
      
-                return StatusCode(500, "Ocorreu um erro ao carregar os dados do imóvel.");
+                return StatusCode(500, "Ocorreu um erro ao carregar os dados do imóvel."+ex);
             }
         }
 
