@@ -202,33 +202,71 @@ div .central {
         outline: 15px solid rgba(254, 85, 37, 0.5);
         font-size: 18px;
     }
-.card-propiedade-detalhe 
-{
-  
+.card-propiedade-detalhe {
     position: relative;
-    height: 250px;
+    height: 300px;
     background-size: cover;
     background-position: center;
-}
-.card-propiedade-detalhe::before 
-{
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.card-propiedade-imovel {
-    position: relative;
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-}
-
-    .card-propiedade-imovel::before {
+    .card-propiedade-detalhe::before {
         content: "";
         position: absolute;
         inset: 0;
         background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
     }
 
+.overlay-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    z-index: 1;
+}
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon
+{
+   color:blue;
+}
+.icon-size {
+    font-size: 30px;
+    color: orangered;
+    padding: 10px;
+}
+.icon-info {
+    font-size: 40px;
+    color: orangered;
+
+}}
+.property-image {
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+
+.property-info {
+    background: #fff;
+    border-radius: 10px;
+}
+
+
+.descricao-limitada {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3em;
+}
+.descricao {
+    font-size: 1.1rem;
+    line-height: 1.0;
+    color: #555;
+    text-align: justify;
+}

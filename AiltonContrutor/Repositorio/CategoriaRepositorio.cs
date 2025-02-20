@@ -1,8 +1,8 @@
-﻿using AiltonContrutor.Context;
-using AiltonContrutor.Models;
-using AiltonContrutor.Repositorio.Interfaces;
+﻿using CasaFacilEPS.Context;
+using CasaFacilEPS.Models;
+using CasaFacilEPS.Repositorio.Interfaces;
 
-namespace AiltonContrutor.Repositorio
+namespace CasaFacilEPS.Repositorio
 {
     public class CategoriaRepositorio : ICategoria
     {

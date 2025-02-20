@@ -7,35 +7,28 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create"></a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Imovel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Url)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Imovel.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Url)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdVideo">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdVideo">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdVideo">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title"> @item.Imovel.Titulo</h5>
+
+                </div>
+                <div class="card-body">
+                  <p><strong>Url:</strong> @item.Url</p>
+              
+                </div>
+                <div class="card-footer">
+                    <a asp-action="Edit" asp-route-id="@item.IdVideo" class="btn btn-primary">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.IdVideo" class="btn btn-info">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdVideo" class="btn btn-danger">Deletar</a>
+                </div>
+                    
+            </div>
+        </div>
+    }
+</div>

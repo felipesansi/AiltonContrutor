@@ -1,6 +1,6 @@
-﻿using AiltonContrutor.Models;
+﻿using CasaFacilEPS.Models;
 
-namespace AiltonContrutor.Repositorio.Interfaces
+namespace CasaFacilEPS.Repositorio.Interfaces
 {
     public class ICategoria
     {

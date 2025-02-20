@@ -2,9 +2,9 @@
 using AiltonConstrutor.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using AiltonContrutor.Models;
+using CasaFacilEPS.Models;
 
-namespace AiltonContrutor.Context
+namespace CasaFacilEPS.Context
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AiltonContrutor.Areas.Admin.Controllers { 
+namespace CasaFacilEPS.Areas.Admin.Controllers { 
 
     [Authorize]
     [Area("Admin")]

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AiltonContrutor.Models
+namespace CasaFacilEPS.Models
 {
     [Table("Categoria")]
     public class Categoria

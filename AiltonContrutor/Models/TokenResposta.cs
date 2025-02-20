@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace AiltonContrutor.Models
+namespace CasaFacilEPS.Models
 {
     public class TokenResposta
     {
