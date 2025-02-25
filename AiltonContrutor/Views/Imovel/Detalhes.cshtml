@@ -1,15 +1,18 @@
 ﻿@model AiltonConstrutor.Models.Imovel
 
-
-<div class="contato-page bg-dark text-white py-5">
+@{
+    ViewData["Title"] = "Detalhes";
+}
+<div class="contato-page bg-dark text-white py-5" data-aos="fade-down" data-aos-duration="1000">
     <div class="container">
         <h1 class="text-center">Detalhes do imóvel</h1>
     </div>
-    </div>
+</div>
+
 <div class="container mt-5">
     <div class="row">
 
-        <div class="col-lg-8">
+        <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1000">
             <div class="property-image">
                 @if (Model.Fotos != null && Model.Fotos.Any())
                 {
@@ -17,13 +20,12 @@
                 }
                 else
                 {
-                    <div class="default-image" style="background-image:url('/images/default-property.jpg');"></div>
+                    <p class="text-muted mt-3">📷 Sem foto disponível</p>
                 }
             </div>
         </div>
 
- 
-        <div class="col-lg-4">
+        <div class="col-lg-4" data-aos="fade-left" data-aos-duration="1000">
             <div class="property-info p-4 shadow-sm rounded">
                 <h4 class="mb-3"><span class="badge bg-light text-dark">@Model.Categoria</span></h4>
                 <h2 class="fw-bold">@Model.Titulo</h2>
@@ -58,13 +60,20 @@
                             <i class="fa-solid fa-hand-holding-dollar me-2 icon-info"></i>  @Model.Valor.ToString("C") - Valor de Venda
                         </li>
                     }
+
                 </ul>
+
+
+                <a asp-controller="Home" asp-action="Contato" class="btn btn-dark btn-lg w-100">
+                    Entre em contato
+                </a>
             </div>
         </div>
     </div>
+
     <div class="container mt-4">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-8" data-aos="fade-up" data-aos-duration="1000">
                 <h2 class="fw-bold mb-3">Sobre este imóvel</h2>
                 <p class="descricao">
                     @Model.Descricao
@@ -73,7 +82,6 @@
         </div>
     </div>
 
-    
     <div class="row py-4">
         <h2 class="text-center mt-5">Vídeos do Imóvel</h2>
         @if (Model.Videos != null && Model.Videos.Any())
@@ -93,7 +101,7 @@
 
             @foreach (var video in Model.Videos.Skip(1))
             {
-                <div class="col-md-6 mb-4">
+                <div class="col-md-6 mb-4" data-aos="zoom-in" data-aos-duration="1000">
                     @await Html.PartialAsync("_Video", video)
                 </div>
             }
@@ -106,3 +114,7 @@
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<!-- Adicionando o AOS (Animate on Scroll) -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+

@@ -4,10 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista de Vídeos</h1>
 
-<p>
-    <a asp-action="Create"></a>
+<p class="mt-4">
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle me-2"></i>Adicionar Vídeo
+    </a>
 </p>
 <div class="row">
     @foreach (var item in Model)

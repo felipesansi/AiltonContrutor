@@ -1,15 +1,19 @@
-﻿<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+﻿<!-- Estilos -->
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 @model List<AiltonConstrutor.Models.Imovel>
 
 @{
     ViewData["Title"] = "Início";
 }
+
 <section id="inicio">
     <div class="contato-page bg-dark text-white py-5">
         <div class="container">
-            <h1 class="text-center">Bem-vindo(a)</h1>
+            <h1 class="text-center">Bem-Vindo(a)</h1>
         </div>
     </div>
 </section>
@@ -17,84 +21,90 @@
 <div class="container mt-4">
     <div class="row">
         
-        <div class="col-md-4">
+        <div class="col-md-4" data-aos="fade-right" data-aos-duration="1000">
             <img src="~/imagens/hero.png" alt="" class="w-100" />
         </div>
 
-        
-        <div class="col-md-4 mt-4">
+        <div class="col-md-4 mt-4" data-aos="fade-up" data-aos-duration="1000">
             <h6>Construa sua casa com a gente</h6>
             <h2>As melhores casas da região</h2>
             <div class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                             Painéis Monolíticos de EPS
                         </button>
                     </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" 
+                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            Oferecemos construções modernas com painéis monolíticos de EPS, tecnologia que proporciona leveza, isolamento térmico e acústico. Este método inovador reduz o tempo de construção e os custos, mantendo a resistência e qualidade. Uma solução ideal para quem busca eficiência e economia.
+                            Oferecemos construções modernas com painéis monolíticos de EPS, tecnologia que proporciona leveza, isolamento térmico e acústico. 
+                            Este método inovador reduz o tempo de construção e os custos, mantendo a resistência e qualidade. Uma solução ideal para quem busca eficiência e economia.
                         </div>
                     </div>
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                             Sustentabilidade e Economia
                         </button>
                     </h2>
-                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" 
+                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            Construções bio-sustentáveis com painéis de EPS que reduzem o impacto ambiental e promovem economia. Além de serem mais baratos, esses materiais oferecem eficiência energética, contribuindo para um futuro mais verde. Escolha construir com qualidade, consciência ambiental e custo acessível.
+                            Construções bio-sustentáveis com painéis de EPS que reduzem o impacto ambiental e promovem economia. Além de serem mais baratos, 
+                            esses materiais oferecem eficiência energética, contribuindo para um futuro mais verde. Escolha construir com qualidade, consciência ambiental e custo acessível.
                         </div>
                     </div>
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                             Economia e Conforto com EPS
                         </button>
                     </h2>
-                    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" 
+                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            Os painéis de EPS são até 30% mais econômicos que métodos tradicionais, sem comprometer a qualidade. Com isolamento térmico superior, proporcionam ambientes mais confortáveis e econômicos no consumo de energia. Perfeito para quem deseja unir inovação e custo-benefício.
+                            Os painéis de EPS são até 30% mais econômicos que métodos tradicionais, sem comprometer a qualidade. Com isolamento térmico superior, 
+                            proporcionam ambientes mais confortáveis e econômicos no consumo de energia. Perfeito para quem deseja unir inovação e custo-benefício.
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-       
-        <div class="col-md-4 ">
+        <div class="col-md-4" data-aos="fade-left" data-aos-duration="1000">
             <div class="info-table">
                 <ul>
                     <li>
-                        <i class="fa-solid fa-building  icon-size"></i>
+                        <i class="fa-solid fa-building icon-size"></i>
                         <h4>Sobrado<br><span>Até 4 andares</span></h4>
                     </li>
                     <li>
                         <i class="fa-solid fa-house icon-size"></i>
                         <h4>Casa<br><span>Alto Padrão</span></h4>
                     </li>
-              
                     <li> 
                         <i class="fa-solid fa-hourglass-end icon-size"></i>
                         <h4>Menos<br><span>Tempo</span></h4>
                     </li>
-                    
                 </ul>
             </div>
         </div>
     </div>
 </div>
+
 <section id="video">
-    <div class="video-secao m-4">
+    <div class="video-secao m-4" data-aos="zoom-in" data-aos-duration="1000">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 offset-lg-4">
                     <div class="cabecalho-secao text-center">
-                        <h6>| Vídeo</h6>
+                        <h6>Explorar | Vídeo</h6>
                         <h2>Veja como a casa em EPS é feita</h2>
                     </div>
                 </div>
@@ -114,12 +124,14 @@
             </div>
         </div>
     </div>
-
-
 </section>
 
 <section id="imovel">
-    <div class="container">
+    <div class="container" data-aos="fade-up" data-aos-duration="1000">
         @await Html.PartialAsync("_Imovel", Model)
     </div>
 </section>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+

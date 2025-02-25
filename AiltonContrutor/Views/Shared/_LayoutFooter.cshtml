@@ -1,4 +1,11 @@
-﻿<footer class="bg-dark text-light py-3">
+﻿@{
+    var youtube = "https://www.youtube.com/@CasaF%C3%A1cilEPS";
+    var tiktok = "https://www.tiktok.com/@ailton.construtor";
+    var instagram = "https://www.instagram.com/construtor.ailton/";
+}
+
+
+<footer class="bg-dark text-light py-3">
     <div class="container text-center">
         <div class="row">
             <div class="col-md-4">
@@ -16,11 +23,11 @@
                 <p>Telefone: (11) 91789-8502</p>
                 <p> Cidade: Bragança Paulista - SP</p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 redes">
                 <h5 class="p-3">Siga-nos</h5>
-                <a href="#" class="text-light me-2"><i class="fab fa-tiktok fa-lg"></i></a>
-                <a href="#" class="text-light me-2"><i class="fab fa-instagram fa-lg"></i></a>
-                <a href="#" class="text-light me-2"><i class="fab fa-youtube fa-lg"></i></a>
+                <a href="@tiktok" target="_blank" class="text-light me-2"><i class="fab fa-tiktok fa-lg"></i></a>
+                <a href="@instagram" target="_blank" class="text-light me-2"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="@youtube"target="_blank" class="text-light me-2"><i class="fab fa-youtube fa-lg"></i></a>
             </div>
         </div>
         <hr class="my-2">

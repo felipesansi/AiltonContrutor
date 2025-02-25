@@ -10,13 +10,20 @@
             {
                 <div class="col">
                     <div class="card border-0 shadow-lg text-center p-3">
-                        <img src="@(string.IsNullOrEmpty(imovel.ImagemUrl) ? "/images/default-property.jpg" : imovel.ImagemUrl)"
-                             class="img-fluid rounded"
-                             alt="Imagem do imóvel">
+                        @if (!string.IsNullOrEmpty(imovel.ImagemUrl))
+                        {
+                            <img src="@imovel.ImagemUrl"
+                                 class="img-fluid rounded"
+                                 alt="Imagem do imóvel">
+                        }
+                        else
+                        {
+                            <p class="text-muted mt-3">📷 Sem foto disponível</p>
+                        }
 
                         <div class="card-body">
                             <span class="badge bg-dark text-white px-3 py-2 mb-2">@imovel.StatusImovel</span>
-
+                            <h4 class="text-black">@imovel.Titulo</h4>
                             @if (imovel.StatusImovel != "Vendida")
                             {
                                 <h4 class="text-danger fw-bold">@imovel.Valor.ToString("C")</h4>
