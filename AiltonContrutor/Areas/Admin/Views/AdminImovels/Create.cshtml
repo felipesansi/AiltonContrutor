@@ -42,22 +42,31 @@
                     <span asp-validation-for="Banheiros" class="text-danger"></span>
                 </div>
 
-                <!-- Características -->
                 <div class="mb-3">
                     <label class="form-label fw-bold">Características</label>
-                    <div class="form-check">
-                        <input class="form-check-input" asp-for="AreaGourmet" />
-                        <label class="form-check-label">Área Gourmet</label>
+                    <div>
+                        <label class="switch">
+                            <input type="checkbox" asp-for="AreaGourmet">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="ms-2">Área Gourmet</span>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" asp-for="Churrasqueira" />
-                        <label class="form-check-label">Churrasqueira</label>
+                    <div>
+                        <label class="switch">
+                            <input type="checkbox" asp-for="Churrasqueira">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="ms-2">Churrasqueira</span>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" asp-for="Piscina" />
-                        <label class="form-check-label">Piscina</label>
+                    <div>
+                        <label class="switch">
+                            <input type="checkbox" asp-for="Piscina">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="ms-2">Piscina</span>
                     </div>
                 </div>
+
 
                 <!-- Valor -->
                 <div class="mb-3">

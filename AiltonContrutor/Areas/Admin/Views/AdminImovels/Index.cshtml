@@ -6,10 +6,11 @@
 
 <h1>Lista de Imóveis</h1>
 
-<p>
-    <a class="btn btn-primary" asp-action="Create">Adicionar Novo Imóvel</a>
+<p class="mt-4">
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle me-2"></i>Adicionar Imóvel
+    </a>
 </p>
-
 <div class="row">
     @foreach (var item in Model)
     {

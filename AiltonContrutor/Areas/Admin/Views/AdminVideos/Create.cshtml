@@ -1,34 +1,32 @@
 ﻿@model Video
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Criar";
 }
 
-<h1>Create</h1>
 
-<h4>Video</h4>
+<h4>Vídeo</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="IdImovel" class="control-label"></label>
-                <select asp-for="IdImovel" class ="form-control" asp-items="ViewBag.IdImovel"></select>
+                <label asp-for="IdImovel" class="control-label">Imóvel</label>
+                <select asp-for="IdImovel" class="form-control" asp-items="ViewBag.IdImovel"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Url" class="control-label"></label>
+                <label asp-for="Url" class="control-label">URL do Vídeo</label>
                 <input asp-for="Url" class="form-control" />
                 <span asp-validation-for="Url" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar à Lista</a>
 </div>
-
