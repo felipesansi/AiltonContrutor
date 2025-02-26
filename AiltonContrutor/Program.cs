@@ -36,6 +36,17 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Configuração da senha
+    options.Password.RequireDigit = false; // Não exige número
+    options.Password.RequiredLength = 6; // Mínimo de 6 caracteres
+    options.Password.RequireNonAlphanumeric = false; // Não exige caractere especial
+    options.Password.RequireUppercase = false; // Não exige letra maiúscula
+    options.Password.RequireLowercase = false; // Não exige letra minúscula
+    options.Password.RequiredUniqueChars = 1; // Mínimo de caracteres únicos
+});
+
 // Configuração do serviço de sessão
 builder.Services.AddSession(options =>
 {

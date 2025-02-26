@@ -228,9 +228,8 @@ div .central {
 
 
 .carousel-control-prev-icon,
-.carousel-control-next-icon
-{
-   color:blue;
+.carousel-control-next-icon {
+    background-color: black;
 }
 .icon-size {
     font-size: 30px;
@@ -253,8 +252,11 @@ div .central {
 .property-info {
     background: #fff;
     border-radius: 10px;
-}
 
+}
+.info {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
 
 .descricao-limitada {
     display: -webkit-box;
