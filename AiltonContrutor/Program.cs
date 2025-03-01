@@ -35,6 +35,9 @@ builder.Services.AddScoped<IUploadFotosService, UploadFotosService>();
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -60,11 +63,6 @@ builder.Services.AddSession(options =>
 var app = builder.Build();
 
 // Configure o pipeline HTTP
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error"); // Redireciona para página de erro
-    app.UseHsts(); // Configura o cabeçalho HSTS
-}
 
 app.UseHttpsRedirection(); // Redireciona HTTP para HTTPS
 app.UseStaticFiles();      // Habilita arquivos estáticos (CSS, JS, imagens)
@@ -79,6 +77,11 @@ app.UseAuthorization();    // Configura a autorização
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "login",
+    pattern: "Login",
+    defaults: new { controller = "Account", action = "Login" });
 
 app.MapControllerRoute(
     name: "default",
