@@ -11,25 +11,15 @@ namespace CasaFacilEPS.Repositorio
 {
     public class UploadFotosService : IUploadFotosService
     {
-        private readonly string _appKey;
-        private readonly string _appSecret;
-        private readonly string _refreshToken;
+        private readonly string _appKey = "awlugc5oznmjln8";
+        private readonly string _appSecret = "2mb4byq0gtxy9x0";
+        private readonly string _refreshToken = "f3wE6nv5vZYAAAAAAAAAAQMz1WSTAzTZBBRYNtNyjRJ1aS89w0ED2dUota1gMXhB";
         private string? _accessToken; // Access Token atualizado
         private readonly HttpClient _httpClient;
         private readonly AppDbContext _appDbContext;
 
         public UploadFotosService(AppDbContext appDbContext)
         {
-            // Carrega as variáveis do arquivo .env
-            DotNetEnv.Env.Load();
-
-            _appKey = Environment.GetEnvironmentVariable("DROPBOX_APP_KEY") 
-                ?? throw new InvalidOperationException("DROPBOX_APP_KEY não encontrado.");
-            _appSecret = Environment.GetEnvironmentVariable("DROPBOX_APP_SECRET") 
-                ?? throw new InvalidOperationException("DROPBOX_APP_SECRET não encontrado.");
-            _refreshToken = Environment.GetEnvironmentVariable("DROPBOX_REFRESH_TOKEN") 
-                ?? throw new InvalidOperationException("DROPBOX_REFRESH_TOKEN não encontrado.");
-
             _httpClient = new HttpClient();
             _appDbContext = appDbContext;
         }

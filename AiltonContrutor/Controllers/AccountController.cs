@@ -11,25 +11,17 @@ namespace CasaFacilEPS.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly string _remetente;
-        private readonly string _smtpServidor;
-        private readonly string _senhaEmail;
-        private readonly int _port;
+        private readonly string _remetente = "construtorailton7@gmail.com";
+        private readonly string _smtpServidor = "smtp.gmail.com";
+        private readonly string _senhaEmail = "czze bluy rcvp brdk";
+        private readonly int _port = 587;
 
         public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-
-            DotNetEnv.Env.Load();
-            _remetente = Environment.GetEnvironmentVariable("REMETENTE_EMAIL") ?? throw new InvalidOperationException("REMETENTE_EMAIL não encontrado.");
-            _smtpServidor = Environment.GetEnvironmentVariable("SMTP_HOST") ?? throw new InvalidOperationException("SMTP_HOST não encontrado.");
-            _senhaEmail = Environment.GetEnvironmentVariable("SENHA_EMAIL") ?? throw new InvalidOperationException("SENHA_EMAIL não encontrado.");
-            _port = int.Parse(Environment.GetEnvironmentVariable("SMTP_PORT") ?? "587");
         }
 
-
-        // Login (GET)
         [HttpGet]
         public IActionResult Login(string? retornoUrl = null)
         {
@@ -42,7 +34,6 @@ namespace CasaFacilEPS.Controllers
             return View(model);
         }
 
-        // Login (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -67,7 +58,6 @@ namespace CasaFacilEPS.Controllers
             return View(model);
         }
 
-        // Logout
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
@@ -77,15 +67,12 @@ namespace CasaFacilEPS.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
         [HttpGet]
         public IActionResult RecuperarSenha()
         {
             return View();
         }
 
-        
-    
         [HttpPost]
         public async Task<IActionResult> RecuperarSenha(string email)
         {
@@ -110,7 +97,6 @@ namespace CasaFacilEPS.Controllers
 
             try
             {
-               
                 using (SmtpClient client = new SmtpClient(_smtpServidor))
                 {
                     client.Port = _port;
@@ -142,8 +128,6 @@ namespace CasaFacilEPS.Controllers
             }
         }
 
-
-
         [HttpGet]
         public IActionResult ResetSenha(string userId, string token, string email)
         {
@@ -156,7 +140,6 @@ namespace CasaFacilEPS.Controllers
             return View(model);
         }
 
-       
         [HttpPost]
         public async Task<IActionResult> ResetSenha(ResetSenhaViewModel model)
         {
