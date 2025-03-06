@@ -21,11 +21,26 @@ namespace AiltonConstrutor.Areas.Admin.Controllers
             _context = context;
         }
 
-
         private void CarregarImoveis()
         {
             var imoveis = _context.Imoveis.ToList();
             ViewData["ListaImovel"] = new SelectList(imoveis, "IdImovel", "Titulo");
+        }
+
+    
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            var fotos = await _context.Fotos
+                .Include(f => f.Imovel)
+                .ToListAsync();
+
+            if (fotos == null || !fotos.Any())
+            {
+                ViewData["MensagemErro"] = "Nenhuma foto encontrada.";
+            }
+
+            return View(fotos);
         }
 
         [HttpGet]
@@ -38,7 +53,6 @@ namespace AiltonConstrutor.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> EnviarFoto(int imovelId, IFormFile foto)
         {
- 
             if (foto == null || foto.Length == 0)
             {
                 ViewData["MensagemErro"] = "Por favor, selecione uma imagem válida.";
@@ -48,7 +62,6 @@ namespace AiltonConstrutor.Areas.Admin.Controllers
 
             var fotosImovel = await _context.Fotos.Where(f => f.ImovelId == imovelId).ToListAsync();
 
-          
             if (!fotosImovel.Any())
             {
                 string nomeFoto = Path.GetFileName(foto.FileName);
@@ -65,7 +78,6 @@ namespace AiltonConstrutor.Areas.Admin.Controllers
 
             try
             {
-   
                 var linkGerado = await _uploadFotosService.UploadFileAsync(foto, caminhoDestino);
                 var linkAjustado = linkGerado.Replace("dl=0", "raw=1");
 
@@ -77,17 +89,10 @@ namespace AiltonConstrutor.Areas.Admin.Controllers
                     return View();
                 }
 
-       
-                var novaFoto = new Foto
-                {
-                    Url = linkAjustado,
-                    ImovelId = imovelId,
-                };
-
+                var novaFoto = new Foto { Url = linkAjustado, ImovelId = imovelId };
                 _context.Fotos.Add(novaFoto);
                 await _context.SaveChangesAsync();
 
-     
                 string nomeFoto = Path.GetFileName(foto.FileName);
                 if (nomeFoto.Contains("Capa", StringComparison.OrdinalIgnoreCase))
                 {
@@ -107,6 +112,47 @@ namespace AiltonConstrutor.Areas.Admin.Controllers
                 CarregarImoveis();
                 return View();
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AtualizarFoto(int id)
+        {
+            var foto = await _context.Fotos.FindAsync(id);
+            if (foto == null) return NotFound();
+
+            CarregarImoveis();
+            return View(foto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AtualizarFoto(int id, IFormFile novaFoto)
+        {
+            var foto = await _context.Fotos.FindAsync(id);
+            if (foto == null) return NotFound();
+
+            if (novaFoto != null && novaFoto.Length > 0)
+            {
+                var nomeUnicoArquivo = $"{Guid.NewGuid()}_{novaFoto.FileName}";
+                var caminhoDestino = $"/Imagens/{nomeUnicoArquivo}";
+                var linkGerado = await _uploadFotosService.UploadFileAsync(novaFoto, caminhoDestino);
+                foto.Url = linkGerado.Replace("dl=0", "raw=1");
+                _context.Fotos.Update(foto);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ExcluirFoto(int id)
+        {
+            var foto = await _context.Fotos.FindAsync(id);
+            if (foto == null) return NotFound();
+
+            _context.Fotos.Remove(foto);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

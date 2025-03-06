@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AiltonConstrutor.Models.Foto>
+
+<h2>Fotos</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Imóvel</th>
+                <th>Foto</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var foto in Model)
+            {
+                <tr>
+                    <td>@foto.Imovel.Titulo</td>
+                    <td><img src="@foto.Url" alt="Foto do imóvel" width="100" /></td>
+                    <td>
+                        <a href="@Url.Action("AtualizarFoto", "AdminFoto", new { id = foto.FotoId })">Atualizar</a> |
+                        <a href="@Url.Action("ExcluirFoto", "AdminFoto", new { id = foto.FotoId })">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Não há fotos cadastradas.</p>
+}
